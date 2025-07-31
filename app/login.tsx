@@ -4,7 +4,7 @@ import {
     StyleSheet, View, Button
 } from "react-native";
 import { useState } from "react";
-import { signInWithEmailAndPassword } from "@firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '@/config/firebase';
 import { useRouter } from "expo-router";
 
