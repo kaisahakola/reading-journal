@@ -31,6 +31,7 @@ const Index = () => {
               </TouchableOpacity>
             ))}
 
+            <Button title="Add new book" onPress={() => router.push('/addNewBook')} />
             <Button title="Logout" onPress={handleLogout} />
         </View>
     );
