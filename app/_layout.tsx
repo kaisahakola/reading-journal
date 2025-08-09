@@ -1,6 +1,6 @@
 import { Slot, useRouter, useSegments } from 'expo-router';
 import { useEffect } from 'react';
-import { useAuth } from '@/hooks/useAuth'; // See below
+import { useAuth } from '@/hooks/useAuth';
 import { View, ActivityIndicator } from 'react-native';
 
 export default function RootLayout() {

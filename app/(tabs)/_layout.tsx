@@ -1,0 +1,25 @@
+import { Tabs } from 'expo-router';
+import { FontAwesome } from '@expo/vector-icons';
+
+const TabLayout = () => {
+    return (
+      <Tabs>
+          <Tabs.Screen name='index' options={{
+                title: 'Home',
+                tabBarIcon: ({color, size}) => (
+                    <FontAwesome name="home" size={size} color={color} />
+                )
+              }}
+          />
+          <Tabs.Screen name='addNewBook' options={{
+                title: 'Add New',
+                tabBarIcon: ({color, size}) => (
+                  <FontAwesome name="book" size={size} color={color} />
+                )
+              }}
+          />
+      </Tabs>
+    );
+}
+
+export default TabLayout;

@@ -10,12 +10,14 @@ import {
 import { Book } from '@/types/book';
 import { addBook } from "@/hooks/useBooks";
 import { auth } from "@/config/firebase";
+import { useRouter } from 'expo-router';
 
 const AddNewBook = () => {
     const [title, setTitle] = useState<string>('');
     const [author, setAuthor] = useState<string>('');
     const [rating, setRating] = useState<string>('');
     const [note, setNote] = useState<string>('');
+    const router = useRouter();
 
     const handleAddNew = async (
         title: string,
