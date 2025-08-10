@@ -1,5 +1,5 @@
 import { useRouter } from "expo-router";
-import { Text, View, Button, StyleSheet, TouchableOpacity } from "react-native";
+import { Text, View, Button, StyleSheet, TouchableOpacity, Alert } from "react-native";
 import { signOut } from 'firebase/auth';
 import { auth } from '@/config/firebase';
 import { getAllBooks } from "@/hooks/useBooks";
@@ -25,8 +25,19 @@ const Index = () => {
 
     const handleLogout = async () => {
         try {
-            await signOut(auth);
-            router.replace('/login');
+            Alert.alert("Logging out", "Are you sure you want to log out?", [
+                {
+                    text: 'Cancel',
+                    style: 'cancel',
+                },
+                {
+                    text: 'Log out',
+                    onPress: async () => {
+                        await signOut(auth);
+                        router.replace('/login');
+                    }
+                }
+            ])
         } catch (error) {
             console.log("Logout error:", error);
         }
