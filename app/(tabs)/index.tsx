@@ -1,16 +1,27 @@
 import { useRouter } from "expo-router";
-import {Text, TouchableOpacity, View, Button, StyleSheet} from "react-native";
+import {Text, View, Button, StyleSheet} from "react-native";
 import { signOut } from 'firebase/auth';
 import { auth } from '@/config/firebase';
-
-const books = [
-  { id: '1', title: '1984', rating: 1 },
-  { id: '2', title: 'Brave New World', rating: 3 },
-  { id: '3', title: 'Dune', rating: 2 },
-];
+import { getAllBooks } from "@/hooks/useBooks";
+import { useEffect, useState } from "react";
+import {Book} from "@/types/book";
 
 const Index = () => {
     const router = useRouter();
+    const [books, setBooks] = useState<Book[]>([]);
+
+    useEffect(() => {
+        const fetchBooks = async () => {
+            const userId = auth.currentUser?.uid;
+            if (!userId) {
+                console.error("No user found");
+                return [];
+            }
+            const allBooks = await getAllBooks(userId);
+            setBooks(allBooks);
+        };
+        fetchBooks();
+    }, [books]);
 
     const handleLogout = async () => {
         try {
@@ -24,14 +35,12 @@ const Index = () => {
     return (
         <View
             style={styles.container}
-          >
-            {books.map((book) => (
-              <TouchableOpacity key={book.id} onPress={() => router.push(`/book/${book.id}`)}>
-                <Text>{book.title}</Text>
-              </TouchableOpacity>
-            ))}
-
-            <Button title="Add new book" onPress={() => router.push('/addNewBook')} />
+        >
+            <View>
+                {books.map((book) => (
+                    <Text key={book.title}>{book.title}</Text>
+                ))}
+            </View>
             <Button title="Logout" onPress={handleLogout} />
         </View>
     );
