@@ -4,3 +4,5 @@ export interface Book {
     note: string;
     rating: number;
 }
+
+export type BookWithId = Book & { id: string };

@@ -1,6 +1,6 @@
-import {addDoc, collection, getDocs, query} from "firebase/firestore";
-import {db} from "@/config/firebase";
-import {Book} from '@/types/book';
+import {addDoc, collection, getDocs, query, getDoc, doc} from "firebase/firestore";
+import { db } from "@/config/firebase";
+import { Book } from '@/types/book';
 
 const addBook = async (userId: string, book: Book) => {
     try {
@@ -29,4 +29,18 @@ const getAllBooks = async (userId: string) => {
     }
 }
 
-export { addBook, getAllBooks };
+const getBookById = async (bookId: string, userId: string) => {
+    try {
+        const docRef = doc(db, "users", userId, "books", bookId);
+        const docSnap = await getDoc(docRef);
+
+        return {
+            id: docSnap.id,
+            ...(docSnap.data() as Book)
+        }
+    } catch (err) {
+        console.error("Error getting document by id: ", err);
+    }
+}
+
+export { addBook, getAllBooks, getBookById };

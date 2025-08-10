@@ -1,14 +1,14 @@
 import { useRouter } from "expo-router";
-import {Text, View, Button, StyleSheet} from "react-native";
+import { Text, View, Button, StyleSheet, TouchableOpacity } from "react-native";
 import { signOut } from 'firebase/auth';
 import { auth } from '@/config/firebase';
 import { getAllBooks } from "@/hooks/useBooks";
 import { useEffect, useState } from "react";
-import {Book} from "@/types/book";
+import { BookWithId } from "@/types/book";
 
 const Index = () => {
     const router = useRouter();
-    const [books, setBooks] = useState<Book[]>([]);
+    const [books, setBooks] = useState<BookWithId[]>([]);
 
     useEffect(() => {
         const fetchBooks = async () => {
@@ -38,7 +38,9 @@ const Index = () => {
         >
             <View>
                 {books.map((book) => (
-                    <Text key={book.title}>{book.title}</Text>
+                    <TouchableOpacity key={book.id} onPress={() => router.push(`/book/${book.id}`)}>
+                        <Text>{book.title}</Text>
+                    </TouchableOpacity>
                 ))}
             </View>
             <Button title="Logout" onPress={handleLogout} />

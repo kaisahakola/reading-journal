@@ -1,26 +1,44 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Button, Text, View, StyleSheet } from 'react-native';
-
-const books = [
-  { id: '1', title: '1984', rating: 1 },
-  { id: '2', title: 'Brave New World', rating: 3 },
-  { id: '3', title: 'Dune', rating: 2 },
-];
+import { useEffect, useState } from 'react';
+import { BookWithId } from "@/types/book";
+import { getBookById } from "@/hooks/useBooks";
+import { auth } from "@/config/firebase";
 
 const BookDetailsScreen = () => {
+  const [book, setBook] = useState<BookWithId>();
   const router = useRouter();
   const { id } = useLocalSearchParams();
 
+  useEffect(() => {
+    const fetchBook = async () => {
+      if (typeof id !== "string") {
+        console.error("Invalid bookId:", id);
+        return;
+      }
+
+      const userId = auth.currentUser?.uid;
+      if (!userId) {
+        console.error("No user found");
+        return [];
+      }
+      const book = await getBookById(id, userId);
+      setBook(book);
+    }
+
+    fetchBook();
+  }, []);
+
   return (
     <View style={styles.container}>
-      {books.map((book) => (
-        id === book.id ? (
-            <View key={book.id}>
-              <Text>{book.title}</Text>
-              <Text>Rating: {book.rating}</Text>
-            </View>
-        ) : null
-      ))}
+      {book ? (
+          <View>
+            <Text>{book.title}</Text>
+            <Text>{book.author}</Text>
+            <Text>{book.rating}</Text>
+            <Text>{book.note}</Text>
+          </View>
+      ) : null }
 
       <Button title="Go back" onPress={() => router.replace('/')} />
     </View>
