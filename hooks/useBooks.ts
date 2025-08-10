@@ -1,4 +1,12 @@
-import {addDoc, collection, getDocs, query, getDoc, doc} from "firebase/firestore";
+import {
+    addDoc,
+    collection,
+    getDocs,
+    query,
+    getDoc,
+    doc,
+    deleteDoc,
+} from "firebase/firestore";
 import { db } from "@/config/firebase";
 import { Book } from '@/types/book';
 
@@ -43,4 +51,13 @@ const getBookById = async (bookId: string, userId: string) => {
     }
 }
 
-export { addBook, getAllBooks, getBookById };
+const deleteBookById = async (bookId: string, userId: string) => {
+    try {
+        const docRef = doc(db, "users", userId, "books", bookId);
+        await deleteDoc(docRef);
+    } catch (err) {
+        console.error("Error deleting document: ", err);
+    }
+}
+
+export { addBook, getAllBooks, getBookById, deleteBookById };
