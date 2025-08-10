@@ -7,14 +7,14 @@ const TabLayout = () => {
           <Tabs.Screen name='index' options={{
                 title: 'Home',
                 tabBarIcon: ({color, size}) => (
-                    <FontAwesome name="home" size={size} color={color} />
+                    <FontAwesome name="book" size={size} color={color} />
                 )
               }}
           />
           <Tabs.Screen name='addNewBook' options={{
                 title: 'Add New',
                 tabBarIcon: ({color, size}) => (
-                  <FontAwesome name="book" size={size} color={color} />
+                  <FontAwesome name="plus" size={size} color={color} />
                 )
               }}
           />
