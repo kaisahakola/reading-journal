@@ -1,4 +1,4 @@
-import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useRouter } from 'expo-router';
 import {
   Button,
   Text,
@@ -6,34 +6,13 @@ import {
   StyleSheet,
   Alert
 } from 'react-native';
-import { useEffect, useState } from 'react';
-import { BookWithId } from "@/types/book";
-import { getBookById, deleteBookById } from "@/hooks/useBooks";
-import { auth } from "@/config/firebase";
+import { deleteBookById } from "@/hooks/useBooks";
 import Toast from 'react-native-toast-message';
+import { useFetchBook } from "@/hooks/useFetchBook";
 
 const BookDetailsScreen = () => {
-  const [book, setBook] = useState<BookWithId>();
   const router = useRouter();
-  const { id } = useLocalSearchParams();
-  const userId = auth.currentUser?.uid;
-
-  useEffect(() => {
-    const fetchBook = async () => {
-      if (typeof id !== "string") {
-        console.error("Invalid bookId:", id);
-        return;
-      }
-      if (!userId) {
-        console.error("No user found");
-        return;
-      }
-      const book = await getBookById(id, userId);
-      setBook(book);
-    }
-
-    fetchBook().catch((err) => console.error("Error fetching book: ", err));
-  }, [id, userId]);
+  const { book, id, userId } = useFetchBook();
 
   const showToast = () => {
     Toast.show({
@@ -65,8 +44,6 @@ const BookDetailsScreen = () => {
           style: 'cancel'
         }
     ]);
-
-
   }
 
   return (
@@ -81,6 +58,7 @@ const BookDetailsScreen = () => {
       ) : null }
 
       <Button title="Delete book" onPress={() => handleDelete()} />
+      <Button title="Update book" onPress={() => router.push(`/book/${id}/edit`)} />
       <Button title="Go back" onPress={() => router.replace('/')} />
     </View>
   );
