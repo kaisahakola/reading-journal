@@ -6,6 +6,7 @@ import {
     getDoc,
     doc,
     deleteDoc,
+    updateDoc,
 } from "firebase/firestore";
 import { db } from "@/config/firebase";
 import { Book } from '@/types/book';
@@ -60,4 +61,16 @@ const deleteBookById = async (bookId: string, userId: string) => {
     }
 }
 
-export { addBook, getAllBooks, getBookById, deleteBookById };
+const updateBookById = async (bookId: string, userId: string, updatedBookData: Book)  => {
+    try {
+        const docRef = doc(db, "users", userId, "books", bookId);
+        await updateDoc(docRef, {
+            ...updatedBookData,
+            updatedAt: new Date().toISOString(),
+        })
+    } catch (err) {
+        console.error("Error updating document: ", err);
+    }
+}
+
+export { addBook, getAllBooks, getBookById, deleteBookById, updateBookById };
