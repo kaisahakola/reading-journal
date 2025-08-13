@@ -11,6 +11,7 @@ import { Book } from '@/types/book';
 import { addBook } from "@/hooks/useBooks";
 import { auth } from "@/config/firebase";
 import { useRouter } from 'expo-router';
+import Toast from "react-native-toast-message";
 
 const AddNewBook = () => {
     const [title, setTitle] = useState<string>('');
@@ -18,6 +19,13 @@ const AddNewBook = () => {
     const [rating, setRating] = useState<string>('');
     const [note, setNote] = useState<string>('');
     const router = useRouter();
+
+    const showToast = () => {
+        Toast.show({
+            type: "success",
+            text1: "New book added!"
+        })
+    }
 
     const handleAddNew = async (
         title: string,
@@ -39,7 +47,9 @@ const AddNewBook = () => {
             return;
         }
 
+        showToast();
         await addBook(userId, newBook);
+        router.push("/");
 
         setTitle("");
         setAuthor("");

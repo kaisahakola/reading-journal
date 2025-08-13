@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 import { BookWithId } from "@/types/book";
 import { getBookById, deleteBookById } from "@/hooks/useBooks";
 import { auth } from "@/config/firebase";
+import Toast from 'react-native-toast-message';
 
 const BookDetailsScreen = () => {
   const [book, setBook] = useState<BookWithId>();
@@ -34,6 +35,12 @@ const BookDetailsScreen = () => {
     fetchBook().catch((err) => console.error("Error fetching book: ", err));
   }, [id, userId]);
 
+  const showToast = () => {
+    Toast.show({
+      type: "success",
+      text1: "Book deleted!"
+    })
+  }
 
   const handleDelete = async () => {
     Alert.alert("Delete this book?", `Are you sure you want to delete ${book?.title}`, [
@@ -49,6 +56,7 @@ const BookDetailsScreen = () => {
               return [];
             }
             await deleteBookById(id, userId);
+            showToast();
             router.push("/");
           }
         },
