@@ -23,18 +23,17 @@ const BookDetailsScreen = () => {
         console.error("Invalid bookId:", id);
         return;
       }
-
       if (!userId) {
         console.error("No user found");
-        return [];
+        return;
       }
-
       const book = await getBookById(id, userId);
       setBook(book);
     }
 
-    fetchBook();
-  }, []);
+    fetchBook().catch((err) => console.error("Error fetching book: ", err));
+  }, [id, userId]);
+
 
   const handleDelete = async () => {
     Alert.alert("Delete this book?", `Are you sure you want to delete ${book?.title}`, [

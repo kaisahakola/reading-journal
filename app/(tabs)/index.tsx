@@ -11,17 +11,18 @@ const Index = () => {
     const [books, setBooks] = useState<BookWithId[]>([]);
 
     useEffect(() => {
-        const fetchBooks = async () => {
-            const userId = auth.currentUser?.uid;
-            if (!userId) {
-                console.error("No user found");
-                return [];
-            }
-            const allBooks = await getAllBooks(userId);
-            setBooks(allBooks);
-        };
-        fetchBooks();
+        fetchBooks().catch((err) => console.error("Error fetching books: ", err));
     }, [books]);
+
+    const fetchBooks = async () => {
+        const userId = auth.currentUser?.uid;
+        if (!userId) {
+            console.error("No user found");
+            return [];
+        }
+        const allBooks = await getAllBooks(userId);
+        setBooks(allBooks);
+    };
 
     const handleLogout = async () => {
         try {
