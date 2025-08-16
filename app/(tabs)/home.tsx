@@ -1,5 +1,5 @@
 import { useRouter } from "expo-router";
-import { Text, View, Button, StyleSheet, Alert } from "react-native";
+import { Text, Button, StyleSheet, Alert, SafeAreaView } from "react-native";
 import { signOut } from 'firebase/auth';
 import { auth } from '@/config/firebase';
 import BookList from '@/components/BookList';
@@ -28,13 +28,13 @@ const Home = () => {
     };
 
     return (
-        <View
+        <SafeAreaView
             style={styles.container}
         >
             <Text style={styles.header}>Books in your Journal</Text>
             <BookList />
             <Button title="Logout" onPress={handleLogout} />
-        </View>
+        </SafeAreaView>
     );
 }
 
