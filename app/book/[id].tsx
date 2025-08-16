@@ -1,14 +1,10 @@
 import { useRouter } from 'expo-router';
-import {
-  Button,
-  Text,
-  View,
-  StyleSheet,
-  Alert
-} from 'react-native';
+import { View, StyleSheet, Alert } from 'react-native';
 import { deleteBookById } from "@/hooks/useBooks";
 import Toast from 'react-native-toast-message';
 import { useFetchBook } from "@/hooks/useFetchBook";
+import BookInfo from "@/components/BookInfo";
+import ButtonWithIcon from "@/components/ButtonWithIcon";
 
 const BookDetailsScreen = () => {
   const router = useRouter();
@@ -22,44 +18,54 @@ const BookDetailsScreen = () => {
   }
 
   const handleDelete = async () => {
-    Alert.alert("Delete this book?", `Are you sure you want to delete ${book?.title}`, [
-        {
-          text: 'Delete',
-          onPress: async () => {
-            if (typeof id !== "string") {
-              console.error("Invalid bookId:", id);
-              return;
+    Alert.alert(
+        "Delete this book?",
+        `Are you sure you want to delete ${book?.title}`,
+        [
+          {
+            text: 'Delete',
+            onPress: async () => {
+              if (typeof id !== "string") {
+                console.error("Invalid bookId:", id);
+                return;
+              }
+              if (!userId) {
+                console.error("No user found");
+                return [];
+              }
+              await deleteBookById(id, userId);
+              showToast();
+              router.push("/(tabs)/home");
             }
-            if (!userId) {
-              console.error("No user found");
-              return [];
-            }
-            await deleteBookById(id, userId);
-            showToast();
-            router.push("/(tabs)/home");
+          },
+          {
+            text: 'Cancel',
+            style: 'cancel'
           }
-        },
-        {
-          text: 'Cancel',
-          style: 'cancel'
-        }
-    ]);
+        ]);
   }
 
   return (
     <View style={styles.container}>
       {book ? (
-          <View>
-            <Text>{book.title}</Text>
-            <Text>{book.author}</Text>
-            <Text>{book.rating}</Text>
-            <Text>{book.note}</Text>
-          </View>
+        <BookInfo book={book} />
       ) : null }
 
-      <Button title="Delete book" onPress={() => handleDelete()} />
-      <Button title="Update book" onPress={() => router.push(`/book/${id}/edit`)} />
-      <Button title="Go back" onPress={() => router.replace('/(tabs)/home')} />
+      <ButtonWithIcon
+          buttonType={"delete"}
+          featherIconName={"trash-2"}
+          onPress={handleDelete}
+      />
+      <ButtonWithIcon
+          buttonType={"edit"}
+          featherIconName={"edit-2"}
+          onPress={() => router.push(`/book/${id}/edit`)}
+      />
+      <ButtonWithIcon
+          buttonType={"goBack"}
+          featherIconName={"arrow-left"}
+          onPress={() => router.replace('/(tabs)/home')}
+      />
     </View>
   );
 }
@@ -67,9 +73,7 @@ const BookDetailsScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: 'lightgray',
     padding: 20,
   },
 })
