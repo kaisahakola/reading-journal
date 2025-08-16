@@ -36,7 +36,7 @@ const BookDetailsScreen = () => {
             }
             await deleteBookById(id, userId);
             showToast();
-            router.push("/");
+            router.push("/(tabs)/home");
           }
         },
         {
@@ -59,7 +59,7 @@ const BookDetailsScreen = () => {
 
       <Button title="Delete book" onPress={() => handleDelete()} />
       <Button title="Update book" onPress={() => router.push(`/book/${id}/edit`)} />
-      <Button title="Go back" onPress={() => router.replace('/')} />
+      <Button title="Go back" onPress={() => router.replace('/(tabs)/home')} />
     </View>
   );
 }

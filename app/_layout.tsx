@@ -15,11 +15,11 @@ export default function RootLayout() {
     const isAuthRoute = segments[0] === 'login' || segments[0] === 'signUp';
 
     if (!user && !isAuthRoute) {
-      router.replace('/login');
+      router.replace('/');
     }
 
     if (user && isAuthRoute) {
-      router.replace('/');
+      router.replace('/(tabs)/home');
     }
 
   }, [user, loading, segments]);

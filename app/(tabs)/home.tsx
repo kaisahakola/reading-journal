@@ -6,7 +6,7 @@ import { getAllBooks } from "@/hooks/useBooks";
 import { useEffect, useState } from "react";
 import { BookWithId } from "@/types/book";
 
-const Index = () => {
+const Home = () => {
     const router = useRouter();
     const [books, setBooks] = useState<BookWithId[]>([]);
 
@@ -35,7 +35,7 @@ const Index = () => {
                     text: 'Log out',
                     onPress: async () => {
                         await signOut(auth);
-                        router.replace('/login');
+                        router.replace("/");
                     }
                 }
             ])
@@ -64,4 +64,4 @@ const styles = StyleSheet.create({
     container: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' },
 });
 
-export default Index;
+export default Home;

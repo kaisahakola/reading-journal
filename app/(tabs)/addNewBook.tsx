@@ -34,7 +34,7 @@ const AddNewBook = () => {
 
         showToast();
         await addBook(userId, bookData);
-        router.replace("/");
+        router.replace("/(tabs)/home");
     }
 
     return (
