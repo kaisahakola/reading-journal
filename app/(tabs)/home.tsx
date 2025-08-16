@@ -1,28 +1,11 @@
 import { useRouter } from "expo-router";
-import { Text, View, Button, StyleSheet, TouchableOpacity, Alert } from "react-native";
+import { Text, View, Button, StyleSheet, Alert } from "react-native";
 import { signOut } from 'firebase/auth';
 import { auth } from '@/config/firebase';
-import { getAllBooks } from "@/hooks/useBooks";
-import { useEffect, useState } from "react";
-import { BookWithId } from "@/types/book";
+import BookList from '@/components/BookList';
 
 const Home = () => {
     const router = useRouter();
-    const [books, setBooks] = useState<BookWithId[]>([]);
-
-    useEffect(() => {
-        fetchBooks().catch((err) => console.error("Error fetching books: ", err));
-    }, [books]);
-
-    const fetchBooks = async () => {
-        const userId = auth.currentUser?.uid;
-        if (!userId) {
-            console.error("No user found");
-            return [];
-        }
-        const allBooks = await getAllBooks(userId);
-        setBooks(allBooks);
-    };
 
     const handleLogout = async () => {
         try {
@@ -48,20 +31,23 @@ const Home = () => {
         <View
             style={styles.container}
         >
-            <View>
-                {books.map((book) => (
-                    <TouchableOpacity key={book.id} onPress={() => router.push(`/book/${book.id}`)}>
-                        <Text>{book.title}</Text>
-                    </TouchableOpacity>
-                ))}
-            </View>
+            <Text style={styles.header}>Books in your Journal</Text>
+            <BookList />
             <Button title="Logout" onPress={handleLogout} />
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    container: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' },
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        backgroundColor: 'white'
+    },
+    header: {
+        fontFamily: 'Crafteds',
+        fontSize: 32,
+    }
 });
 
 export default Home;
