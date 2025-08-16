@@ -6,3 +6,5 @@ export interface Book {
 }
 
 export type BookWithId = Book & { id: string };
+
+export type BookWithIdAndDate = Book & { id: string, createdAt?: string, updatedAt?: string };

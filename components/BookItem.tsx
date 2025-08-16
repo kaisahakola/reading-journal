@@ -1,14 +1,22 @@
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { useRouter } from "expo-router"
-import { BookWithId } from "@/types/book";
+import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {useRouter} from "expo-router"
+import {BookWithIdAndDate} from "@/types/book";
 import StarRating from "./StarRating";
 
 interface BookItemProps {
-    book: BookWithId;
+    book: BookWithIdAndDate;
 }
 
 const BookItem = ({ book }: BookItemProps) => {
     const router = useRouter();
+
+    const parseDate = (date: string) => {
+        const year = date.slice(0, 4);
+        const month = date.slice(6, 7);
+        const day = date.slice(8, 10);
+
+        return `${day}.${month}.${year}`;
+    }
 
     return (
         <View style={styles.container}>
@@ -16,6 +24,11 @@ const BookItem = ({ book }: BookItemProps) => {
                 <Text style={styles.title}>{book.title}</Text>
                 <Text style={styles.author}>{book.author}</Text>
                 <StarRating rating={book.rating} />
+                <View style={styles.date}>
+                    {book.createdAt ? (
+                        <Text>{parseDate(book.createdAt)}</Text>
+                    ) : null}
+                </View>
             </TouchableOpacity>
         </View>
     )
@@ -29,6 +42,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         width: '90%',
         margin: 'auto',
+        flex: 1,
     },
     title: {
         fontSize: 24,
@@ -37,7 +51,11 @@ const styles = StyleSheet.create({
     author: {
         fontSize: 18,
         fontFamily: 'AndadaPro',
-        marginBottom: 5,
+        marginBottom: 8,
+        marginTop: 8,
+    },
+    date: {
+        marginLeft: 'auto',
     }
 })
 

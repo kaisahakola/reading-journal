@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { BookWithId } from "@/types/book";
+import { BookWithIdAndDate } from "@/types/book";
 import { auth } from "@/config/firebase";
 import { getAllBooks } from "@/hooks/useBooks";
-import { View, StyleSheet } from "react-native";
+import {View, StyleSheet, ScrollView} from "react-native";
 import BookItem from "./BookItem";
 
 const BookList = () => {
-    const [books, setBooks] = useState<BookWithId[]>([]);
+    const [books, setBooks] = useState<BookWithIdAndDate[]>([]);
 
     useEffect(() => {
         fetchBooks().catch((err) => console.error("Error fetching books: ", err));
@@ -23,13 +23,13 @@ const BookList = () => {
     };
 
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             {books.map((book) => (
                 <View key={book.id}>
                     <BookItem book={book} />
                 </View>
             ))}
-        </View>
+        </ScrollView>
     )
 }
 
