@@ -1,6 +1,11 @@
-import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
-import {useRouter} from "expo-router"
-import {BookWithIdAndDate} from "@/types/book";
+import {
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View
+} from "react-native";
+import { useRouter } from "expo-router"
+import { BookWithIdAndDate } from "@/types/book";
 import StarRating from "./StarRating";
 
 interface BookItemProps {
