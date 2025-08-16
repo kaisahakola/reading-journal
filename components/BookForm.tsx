@@ -16,7 +16,12 @@ interface BookFormProps {
     formLabel: string;
 }
 
-const BookForm = ({ onSubmit, submitLabel, initialValues, formLabel}: BookFormProps) => {
+const BookForm = ({
+    onSubmit,
+    submitLabel,
+    initialValues,
+    formLabel,
+}: BookFormProps) => {
     const [title, setTitle] = useState<string>('');
     const [author, setAuthor] = useState<string>('');
     const [rating, setRating] = useState<string>('');
@@ -30,6 +35,14 @@ const BookForm = ({ onSubmit, submitLabel, initialValues, formLabel}: BookFormPr
             setNote(initialValues.note);
         }
     }, [initialValues]);
+
+    const handleOnSubmit = () => {
+        setTitle("");
+        setAuthor("");
+        setRating("");
+        setNote("");
+        onSubmit({title, author, rating: Number(rating), note})
+    }
 
     return (
         <SafeAreaView style={styles.wrapper}>
@@ -67,12 +80,7 @@ const BookForm = ({ onSubmit, submitLabel, initialValues, formLabel}: BookFormPr
                     onChangeText={setNote}
                     style={styles.input}
                 />
-                <Button title={submitLabel} onPress={() => onSubmit({
-                    title,
-                    author,
-                    rating: Number(rating),
-                    note
-                })} />
+                <Button title={submitLabel} onPress={handleOnSubmit} />
             </View>
         </SafeAreaView>
     )

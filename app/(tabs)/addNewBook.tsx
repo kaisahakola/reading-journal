@@ -1,12 +1,4 @@
-import { useState } from "react";
-import {
-    SafeAreaView,
-    View,
-    TextInput,
-    StyleSheet,
-    Text,
-    Button
-} from "react-native";
+import { SafeAreaView, StyleSheet,} from "react-native";
 import { Book } from '@/types/book';
 import { addBook } from "@/hooks/useBooks";
 import { auth } from "@/config/firebase";
@@ -39,7 +31,11 @@ const AddNewBook = () => {
 
     return (
         <SafeAreaView style={styles.wrapper}>
-            <BookForm onSubmit={handleAddNew} submitLabel="Add New Book" formLabel="Add New Book" />
+            <BookForm
+                onSubmit={handleAddNew}
+                submitLabel="Add New Book"
+                formLabel="Add New Book"
+            />
         </SafeAreaView>
     )
 }
