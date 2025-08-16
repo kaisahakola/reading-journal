@@ -33,8 +33,16 @@ const EditBook = () => {
 
     return (
         <SafeAreaView style={styles.wrapper}>
-            <BookForm onSubmit={handleUpdate} submitLabel="Edit Book" initialValues={book} formLabel="Edit Book" />
-            <Button title="Go back" onPress={() => router.replace(`/book/${id}`)} />
+            <BookForm
+                onSubmit={handleUpdate}
+                submitLabel="Edit Book"
+                initialValues={book}
+                formLabel="Edit Book"
+            />
+            <Button
+                title="Go back"
+                onPress={() => router.replace(`/book/${id}`)}
+            />
         </SafeAreaView>
     )
 }
@@ -42,7 +50,8 @@ const EditBook = () => {
 const styles = StyleSheet.create({
     wrapper: {
         flex: 1,
-        backgroundColor: 'white'
+        backgroundColor: 'lightgray',
+        padding: 30
     }
 })
 

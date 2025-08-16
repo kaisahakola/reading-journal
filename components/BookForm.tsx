@@ -1,9 +1,8 @@
 import {
-    Button,
     SafeAreaView,
     StyleSheet,
     Text,
-    TextInput,
+    TextInput, TouchableOpacity,
     View
 } from "react-native";
 import {useEffect, useState} from "react";
@@ -80,7 +79,12 @@ const BookForm = ({
                     onChangeText={setNote}
                     style={styles.input}
                 />
-                <Button title={submitLabel} onPress={handleOnSubmit} />
+                <TouchableOpacity
+                    style={styles.submitButton}
+                    onPress={handleOnSubmit}
+                >
+                    <Text style={styles.submitButtonLabel}>{submitLabel}</Text>
+                </TouchableOpacity>
             </View>
         </SafeAreaView>
     )
@@ -89,24 +93,36 @@ const BookForm = ({
 const styles = StyleSheet.create({
     wrapper: {
         flex: 1,
-        backgroundColor: 'white'
+        width: '90%',
+        margin: 'auto',
     },
     container: {
         marginTop: '35%',
     },
     input: {
-        padding: 10,
-        borderWidth: 1,
-        borderRadius: 8,
-        marginBottom: 8,
-        width: '90%',
-        margin: 'auto'
+        marginBottom: 15,
+        padding: 15,
+        borderRadius: 20,
+        height: 50,
+        backgroundColor: 'white'
     },
     titleText: {
         fontSize: 32,
         fontWeight: 'bold',
         textAlign: 'center',
         marginBottom: 20,
+        fontFamily: 'Crafteds'
+    },
+    submitButton: {
+        backgroundColor: 'black',
+        height: 50,
+        borderRadius: 20,
+        justifyContent: 'center',
+        marginTop: 10,
+    },
+    submitButtonLabel: {
+        color: 'white',
+        textAlign: 'center',
     }
 })
 
