@@ -4,18 +4,18 @@ import {
     StyleSheet,
     View,
     TouchableOpacity,
-    Button
 } from "react-native";
 import { useState } from "react";
-import { AuthData } from "@/types/auth";
+import { AuthData, AuthMode } from "@/types/auth";
 
 interface AuthFormProps {
-    onSubmit: (authData: AuthData) => void;
+    onSubmit: (activeForm: AuthMode, authData: AuthData) => void;
     submitLabel: string;
     formLabel: string;
     linkText: string;
     link: string;
     onToggleForm: () => void;
+    activeForm: "login" | "signup";
 }
 
 const AuthForm = ({
@@ -25,6 +25,7 @@ const AuthForm = ({
     linkText,
     link,
     onToggleForm,
+    activeForm,
 }: AuthFormProps) => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
@@ -32,7 +33,7 @@ const AuthForm = ({
 
     const handleSubmit = () => {
         try {
-            onSubmit({email, password});
+            onSubmit(activeForm, {email, password});
         } catch (err: any) {
             setError(err.message);
         }
@@ -59,7 +60,10 @@ const AuthForm = ({
                 value={password}
                 secureTextEntry={true}
             />
-            <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
+            <TouchableOpacity
+                style={styles.submitButton}
+                onPress={handleSubmit}
+            >
                 <Text style={styles.submitButtonLabel}>
                     {submitLabel}
                 </Text>
@@ -80,15 +84,23 @@ const AuthForm = ({
 
 const styles = StyleSheet.create({
     container: {
-        padding: 20,
-        flex: 1,
-        justifyContent: 'center',
-        backgroundColor: 'white',
-        width: '90%',
-        margin: 'auto'
+        backgroundColor: 'lightgray',
+        width: '100%',
+        paddingTop: '30%',
     },
-    title: { fontSize: 24, fontWeight: 'bold', marginBottom: 50, textAlign: 'center' },
-    input: { borderWidth: 1, marginBottom: 15, padding: 15, borderRadius: 20, height: 50 },
+    title: {
+        fontSize: 32,
+        marginBottom: 50,
+        textAlign: 'center',
+        fontFamily: 'Crafteds'
+    },
+    input: {
+        marginBottom: 15,
+        padding: 15,
+        borderRadius: 20,
+        height: 50,
+        backgroundColor: 'white'
+    },
     error: { color: 'red', marginBottom: 10 },
     link: { color: 'blue', textAlign: 'center' },
     linkText: { marginTop: 50, marginBottom: 10, textAlign: 'center' },
