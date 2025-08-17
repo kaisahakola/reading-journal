@@ -6,15 +6,15 @@ import Toast from 'react-native-toast-message';
 import * as Font from 'expo-font';
 
 export default function RootLayout() {
-  const {user, loading} = useAuth();
+  const { user, loading } = useAuth();
   const router = useRouter();
   const [fontsLoaded, setFontsLoaded] = useState(false);
 
   useEffect(() => {
-      Font.loadAsync({
-          'Crafteds': require('../assets/fonts/Crafteds-Regular.ttf'),
-          'AndadaPro': require('../assets/fonts/AndadaPro-VariableFont_wght.ttf')
-      }).then(() => setFontsLoaded(true));
+    Font.loadAsync({
+      Crafteds: require('../assets/fonts/Crafteds-Regular.ttf'),
+      AndadaPro: require('../assets/fonts/AndadaPro-VariableFont_wght.ttf'),
+    }).then(() => setFontsLoaded(true));
     if (loading) return;
     if (!user) {
       router.replace('/');
@@ -22,23 +22,22 @@ export default function RootLayout() {
     if (user) {
       router.replace('/(tabs)/home');
     }
-
   }, [user, loading, router]);
 
   if (!fontsLoaded) return null;
 
   if (loading) {
     return (
-        <View style={{ flex: 1, justifyContent: 'center' }}>
-          <ActivityIndicator size="large" />
-        </View>
+      <View style={{ flex: 1, justifyContent: 'center' }}>
+        <ActivityIndicator size="large" />
+      </View>
     );
   }
 
   return (
-      <>
-        <Slot />
-        <Toast />
-      </>
-  )
+    <>
+      <Slot />
+      <Toast />
+    </>
+  );
 }

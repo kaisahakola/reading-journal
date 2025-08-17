@@ -1,1 +1,1 @@
-export type ButtonType = "delete" | "edit" | "goBack";
+export type ButtonType = 'delete' | 'edit' | 'goBack';
