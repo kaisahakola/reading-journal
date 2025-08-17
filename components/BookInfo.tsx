@@ -1,5 +1,5 @@
 import { BookWithIdAndDate } from '@/types/book';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 import StarRating from './StarRating';
 import { parseDate } from '@/utils/date';
 
@@ -13,12 +13,14 @@ const BookInfo = ({ book }: BookInfoProps) => {
       {book.createdAt ? (
         <Text style={styles.date}>{parseDate(book.createdAt)}</Text>
       ) : null}
-      <View style={styles.textContainer}>
-        <Text style={styles.title}>{book.title}</Text>
-        <Text style={styles.author}>{book.author}</Text>
-        <StarRating rating={book.rating} size={'big'} />
-        <Text style={styles.note}>{book.note}</Text>
-      </View>
+      <ScrollView>
+        <View style={styles.textContainer}>
+          <Text style={styles.title}>{book.title}</Text>
+          <Text style={styles.author}>{book.author}</Text>
+          <StarRating rating={book.rating} size={'big'} />
+          <Text style={styles.note}>{book.note}</Text>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -37,6 +39,8 @@ const styles = StyleSheet.create({
     fontSize: 36,
     fontFamily: 'Crafteds',
     marginBottom: 5,
+    textAlign: 'center',
+    padding: 15,
   },
   author: {
     fontFamily: 'AndadaPro',
