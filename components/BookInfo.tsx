@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Crafteds',
     marginBottom: 5,
     textAlign: 'center',
-    padding: 15,
+    paddingHorizontal: 15,
   },
   author: {
     fontFamily: 'AndadaPro',
