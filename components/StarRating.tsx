@@ -2,9 +2,10 @@ import { View, StyleSheet, Image } from 'react-native';
 
 interface StarRatingProps {
   rating: number;
+  size: 'big' | 'small';
 }
 
-const StarRating = ({ rating }: StarRatingProps) => {
+const StarRating = ({ rating, size }: StarRatingProps) => {
   return (
     <View style={styles.container}>
       {Array.from({ length: 5 }).map((_, index) => {
@@ -17,7 +18,11 @@ const StarRating = ({ rating }: StarRatingProps) => {
                 ? require('@/assets/images/yellow_star_icon.png')
                 : require('@/assets/images/gray_star_icon.png')
             }
-            style={styles.star}
+            style={{
+              width: size === 'big' ? 32 : size === 'small' ? 24 : 0,
+              height: size === 'big' ? 32 : size === 'small' ? 24 : 0,
+              margin: size === 'big' ? 4 : size === 'small' ? 2 : 0,
+            }}
           />
         );
       })}
@@ -28,11 +33,6 @@ const StarRating = ({ rating }: StarRatingProps) => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-  },
-  star: {
-    width: 24,
-    height: 24,
-    marginRight: 4,
   },
 });
 

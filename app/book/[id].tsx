@@ -47,33 +47,46 @@ const BookDetailsScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      {book ? <BookInfo book={book} /> : null}
+    <SafeAreaView style={styles.container}>
+      <View style={styles.buttonsContainer}>
+        <ButtonWithIcon
+          buttonType={'goBack'}
+          featherIconName={'arrow-left'}
+          onPress={() => router.replace('/(tabs)/home')}
+        />
 
-      <ButtonWithIcon
-        buttonType={'delete'}
-        featherIconName={'trash-2'}
-        onPress={handleDelete}
-      />
-      <ButtonWithIcon
-        buttonType={'edit'}
-        featherIconName={'edit-2'}
-        onPress={() => router.push(`/book/${id}/edit`)}
-      />
-      <ButtonWithIcon
-        buttonType={'goBack'}
-        featherIconName={'arrow-left'}
-        onPress={() => router.replace('/(tabs)/home')}
-      />
-    </View>
+        <View style={styles.editAndDeleteButtons}>
+          <ButtonWithIcon
+            buttonType={'delete'}
+            featherIconName={'trash-2'}
+            onPress={handleDelete}
+          />
+          <ButtonWithIcon
+            buttonType={'edit'}
+            featherIconName={'edit-2'}
+            onPress={() => router.push(`/book/${id}/edit`)}
+          />
+        </View>
+      </View>
+
+      {book ? <BookInfo book={book} /> : null}
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'lightgray',
-    padding: 20,
+    backgroundColor: 'white',
+  },
+  editAndDeleteButtons: {
+    flexDirection: 'row',
+    marginLeft: 'auto',
+    gap: 10,
+  },
+  buttonsContainer: {
+    flexDirection: 'row',
+    padding: 15,
   },
 });
 

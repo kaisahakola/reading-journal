@@ -19,7 +19,7 @@ const ButtonWithIcon = (props: ButtonWithIconProps) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
+    backgroundColor: 'lightgray',
     borderRadius: 50,
     padding: 15,
     alignSelf: 'flex-start',
