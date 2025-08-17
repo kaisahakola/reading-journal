@@ -74,9 +74,11 @@ const BookForm = ({
         <TextInput
           placeholder="Note"
           placeholderTextColor="#333"
+          multiline={true}
+          numberOfLines={4}
           value={note}
           onChangeText={setNote}
-          style={styles.input}
+          style={{ ...styles.input, minHeight: 100 }}
         />
         <TouchableOpacity style={styles.submitButton} onPress={handleOnSubmit}>
           <Text style={styles.submitButtonLabel}>{submitLabel}</Text>
@@ -101,6 +103,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     height: 50,
     backgroundColor: 'white',
+    textAlignVertical: 'top',
   },
   titleText: {
     fontSize: 32,
