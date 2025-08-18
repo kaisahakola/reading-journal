@@ -4,6 +4,8 @@ import {
   StyleSheet,
   View,
   TouchableOpacity,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from 'react-native';
 import { useState } from 'react';
 import { AuthData, AuthMode } from '@/types/auth';
@@ -40,36 +42,38 @@ const AuthForm = ({
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>{formLabel}</Text>
-      {error ? <Text style={styles.error}>{error}</Text> : null}
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        placeholderTextColor="#333"
-        onChangeText={setEmail}
-        value={email}
-        keyboardType="email-address"
-        autoCapitalize="none"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        placeholderTextColor="#333"
-        onChangeText={setPassword}
-        value={password}
-        secureTextEntry={true}
-      />
-      <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
-        <Text style={styles.submitButtonLabel}>{submitLabel}</Text>
-      </TouchableOpacity>
-      <View>
-        <Text style={styles.linkText}>{linkText}</Text>
-        <TouchableOpacity onPress={onToggleForm}>
-          <Text style={styles.link}>{link}</Text>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.container}>
+        <Text style={styles.title}>{formLabel}</Text>
+        {error ? <Text style={styles.error}>{error}</Text> : null}
+        <TextInput
+          style={styles.input}
+          placeholder="Email"
+          placeholderTextColor="#333"
+          onChangeText={setEmail}
+          value={email}
+          keyboardType="email-address"
+          autoCapitalize="none"
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          placeholderTextColor="#333"
+          onChangeText={setPassword}
+          value={password}
+          secureTextEntry={true}
+        />
+        <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
+          <Text style={styles.submitButtonLabel}>{submitLabel}</Text>
         </TouchableOpacity>
+        <View>
+          <Text style={styles.linkText}>{linkText}</Text>
+          <TouchableOpacity onPress={onToggleForm}>
+            <Text style={styles.link}>{link}</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 

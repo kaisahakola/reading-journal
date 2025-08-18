@@ -4,6 +4,8 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  TouchableWithoutFeedback,
+  Keyboard,
   View,
 } from 'react-native';
 import { useEffect, useState } from 'react';
@@ -45,10 +47,9 @@ const BookForm = ({
   };
 
   return (
-    <SafeAreaView style={styles.wrapper}>
-      <View style={styles.container}>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <SafeAreaView style={styles.container}>
         <Text style={styles.titleText}>{formLabel}</Text>
-
         <TextInput
           placeholder="Title"
           placeholderTextColor="#333"
@@ -83,18 +84,16 @@ const BookForm = ({
         <TouchableOpacity style={styles.submitButton} onPress={handleOnSubmit}>
           <Text style={styles.submitButtonLabel}>{submitLabel}</Text>
         </TouchableOpacity>
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 };
 
 const styles = StyleSheet.create({
-  wrapper: {
+  container: {
     flex: 1,
     width: '90%',
-    margin: 'auto',
-  },
-  container: {
+    marginHorizontal: 'auto',
     marginTop: '35%',
   },
   input: {
