@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { useState } from 'react';
 import { AuthData, AuthMode } from '@/types/auth';
+import SubmitButton from '@/components/SubmitButton';
 
 interface AuthFormProps {
   onSubmit: (activeForm: AuthMode, authData: AuthData) => void;
@@ -32,10 +33,12 @@ const AuthForm = ({
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string>('');
+  const [firstName, setFirstName] = useState<string>('');
+  const [lastName, setLastName] = useState<string>('');
 
   const handleSubmit = () => {
     try {
-      onSubmit(activeForm, { email, password });
+      onSubmit(activeForm, { email, password, firstName, lastName });
     } catch (err: any) {
       setError(err.message);
     }
@@ -46,6 +49,26 @@ const AuthForm = ({
       <View style={styles.container}>
         <Text style={styles.title}>{formLabel}</Text>
         {error ? <Text style={styles.error}>{error}</Text> : null}
+        {activeForm === 'signup' ? (
+          <View>
+            <TextInput
+              style={styles.input}
+              placeholder={'First name'}
+              placeholderTextColor="#333"
+              onChangeText={setFirstName}
+              value={firstName}
+              autoCapitalize={'words'}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder={'Last name'}
+              placeholderTextColor="#333"
+              onChangeText={setLastName}
+              value={lastName}
+              autoCapitalize={'words'}
+            />
+          </View>
+        ) : null}
         <TextInput
           style={styles.input}
           placeholder="Email"
@@ -63,9 +86,7 @@ const AuthForm = ({
           value={password}
           secureTextEntry={true}
         />
-        <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
-          <Text style={styles.submitButtonLabel}>{submitLabel}</Text>
-        </TouchableOpacity>
+        <SubmitButton onPress={handleSubmit} label={submitLabel} />
         <View>
           <Text style={styles.linkText}>{linkText}</Text>
           <TouchableOpacity onPress={onToggleForm}>
@@ -99,14 +120,6 @@ const styles = StyleSheet.create({
   error: { color: 'red', marginBottom: 10 },
   link: { color: 'blue', textAlign: 'center' },
   linkText: { marginTop: 50, marginBottom: 10, textAlign: 'center' },
-  submitButton: {
-    marginTop: 15,
-    padding: 15,
-    borderRadius: 20,
-    height: 50,
-    backgroundColor: 'black',
-  },
-  submitButtonLabel: { color: 'white', textAlign: 'center' },
 });
 
 export default AuthForm;

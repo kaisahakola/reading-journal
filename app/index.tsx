@@ -3,13 +3,16 @@ import AuthForm from '@/components/AuthForm';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from 'firebase/auth';
-import { auth } from '@/config/firebase';
+import { auth, db } from '@/config/firebase';
 import { AuthData, AuthMode } from '@/types/auth';
 import { router } from 'expo-router';
 import { useRef, useState } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
+import { setDoc } from '@firebase/firestore';
+import { doc } from 'firebase/firestore';
 
 const Index = () => {
   const [activeForm, setActiveForm] = useState<'login' | 'signup' | ''>('');
@@ -19,12 +22,30 @@ const Index = () => {
 
   const handleAuth = async (
     authMode: AuthMode,
-    { email, password }: AuthData,
+    { email, password, firstName, lastName }: AuthData,
   ) => {
     if (authMode === 'login') {
       await signInWithEmailAndPassword(auth, email, password);
     } else if (authMode === 'signup') {
-      await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
+      const user = userCredential.user;
+
+      await updateProfile(user, {
+        displayName: `${firstName} ${lastName}`,
+      });
+
+      await user.reload();
+
+      await setDoc(doc(db, 'users', user.uid), {
+        firstName,
+        lastName,
+        email: user.email,
+        createdAt: new Date(),
+      });
     }
     router.replace('/(tabs)/home');
   };
