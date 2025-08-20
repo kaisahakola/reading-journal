@@ -1,23 +1,24 @@
 import { useEffect, useState } from 'react';
 import { BookWithIdAndDate } from '@/types/book';
-import { auth } from '@/config/firebase';
-import { getAllBooks } from '@/hooks/useBooks';
+import { auth, db } from '@/config/firebase';
+import { collection, onSnapshot, query } from 'firebase/firestore';
 
 export const useFetchAllBooks = () => {
   const [books, setBooks] = useState<BookWithIdAndDate[]>([]);
   const userId = auth.currentUser?.uid;
 
   useEffect(() => {
-    const fetchBooks = async () => {
-      if (!userId) {
-        console.error('No user found');
-        return [];
-      }
-      const allBooks = await getAllBooks(userId);
-      setBooks(allBooks);
-    };
+    if (!userId) return;
 
-    fetchBooks().catch((err) => console.error('Error fetching books: ', err));
+    const q = query(collection(db, 'users', userId, 'books'));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const allBooks: BookWithIdAndDate[] = querySnapshot.docs.map(
+        (doc) => doc.data() as BookWithIdAndDate,
+      );
+      setBooks(allBooks);
+    });
+
+    return () => unsubscribe();
   }, [userId]);
 
   return { books, userId };

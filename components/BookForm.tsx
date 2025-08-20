@@ -3,13 +3,12 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
-  View,
 } from 'react-native';
 import { useEffect, useState } from 'react';
 import { Book } from '@/types/book';
+import SubmitButton from './SubmitButton';
 
 interface BookFormProps {
   onSubmit: (bookData: Book) => void;
@@ -81,9 +80,7 @@ const BookForm = ({
           onChangeText={setNote}
           style={{ ...styles.input, minHeight: 100 }}
         />
-        <TouchableOpacity style={styles.submitButton} onPress={handleOnSubmit}>
-          <Text style={styles.submitButtonLabel}>{submitLabel}</Text>
-        </TouchableOpacity>
+        <SubmitButton onPress={handleOnSubmit} label={submitLabel} />
       </SafeAreaView>
     </TouchableWithoutFeedback>
   );
@@ -110,17 +107,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 20,
     fontFamily: 'Crafteds',
-  },
-  submitButton: {
-    backgroundColor: 'black',
-    height: 50,
-    borderRadius: 20,
-    justifyContent: 'center',
-    marginTop: 10,
-  },
-  submitButtonLabel: {
-    color: 'white',
-    textAlign: 'center',
   },
 });
 
