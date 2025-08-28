@@ -7,8 +7,9 @@ import {
   Keyboard,
 } from 'react-native';
 import { useEffect, useState } from 'react';
-import { Book } from '@/types/book';
+import { Book, Genres, GenresList } from '@/types/book';
 import SubmitButton from './SubmitButton';
+import { Dropdown } from 'react-native-element-dropdown';
 
 interface BookFormProps {
   onSubmit: (bookData: Book) => void;
@@ -27,6 +28,7 @@ const BookForm = ({
   const [author, setAuthor] = useState<string>('');
   const [rating, setRating] = useState<string>('');
   const [note, setNote] = useState<string>('');
+  const [genre, setGenre] = useState<Genres>(null);
 
   useEffect(() => {
     if (initialValues) {
@@ -34,6 +36,7 @@ const BookForm = ({
       setAuthor(initialValues.author);
       setRating(initialValues.rating.toString());
       setNote(initialValues.note);
+      setGenre(initialValues.genre);
     }
   }, [initialValues]);
 
@@ -42,7 +45,8 @@ const BookForm = ({
     setAuthor('');
     setRating('');
     setNote('');
-    onSubmit({ title, author, rating: Number(rating), note });
+    setGenre(null);
+    onSubmit({ title, author, rating: Number(rating), note, genre });
   };
 
   return (
@@ -70,6 +74,20 @@ const BookForm = ({
           value={rating}
           onChangeText={setRating}
           style={styles.input}
+        />
+        <Dropdown
+          style={styles.input}
+          data={GenresList}
+          search
+          maxHeight={300}
+          labelField="label"
+          valueField="value"
+          placeholder="Genre"
+          searchPlaceholder="Search..."
+          value={genre}
+          onChange={(item) => {
+            setGenre(item.value);
+          }}
         />
         <TextInput
           placeholder="Note"

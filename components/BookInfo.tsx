@@ -17,6 +17,7 @@ const BookInfo = ({ book }: BookInfoProps) => {
         <View style={styles.textContainer}>
           <Text style={styles.title}>{book.title}</Text>
           <Text style={styles.author}>{book.author}</Text>
+          <Text style={styles.genre}>{book.genre}</Text>
           <StarRating rating={book.rating} size={'big'} />
           <Text style={styles.note}>{book.note}</Text>
         </View>
@@ -55,6 +56,10 @@ const styles = StyleSheet.create({
     width: '80%',
     minHeight: '20%',
     fontSize: 16,
+  },
+  genre: {
+    fontFamily: 'Helvetica',
+    marginBottom: 15,
   },
 });
 
