@@ -1,41 +1,51 @@
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, onSnapshot } from 'firebase/firestore';
 import { db } from '@/config/firebase';
 import { useEffect, useState } from 'react';
+import { ImageSourcePropType } from 'react-native';
 
 export const useUserProfile = (userId?: string | null) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
+  const profileIcon = require('@/assets/images/profile_icon.png');
+  const [profilePicture, setProfilePicture] =
+    useState<ImageSourcePropType>(profileIcon);
   const [loading, setLoading] = useState<boolean>(true);
+  const [isDefaultPicture, setIsDefaultPicture] = useState(false);
 
   useEffect(() => {
     if (!userId) {
       setLoading(false);
       return;
     }
-    const getUsersData = async (userId: string) => {
-      try {
-        const docRef = doc(db, 'users', userId);
-        const docSnap = await getDoc(docRef);
 
-        if (docSnap.exists()) {
-          setFirstName(docSnap.data().firstName);
-          setLastName(docSnap.data().lastName);
-          setEmail(docSnap.data().email);
+    const unsubscribe = onSnapshot(doc(db, 'users', userId), (docSnap) => {
+      if (docSnap.exists()) {
+        setFirstName(docSnap.data().firstName);
+        setLastName(docSnap.data().lastName);
+        setEmail(docSnap.data().email);
+
+        const picture = docSnap.data().profilePicture;
+        if (picture) {
+          setProfilePicture({ uri: picture });
+          setIsDefaultPicture(false);
         } else {
-          console.log('No such user!');
+          setProfilePicture(profileIcon);
+          setIsDefaultPicture(true);
         }
-      } catch (err) {
-        console.error('Error getting users name: ', err);
-      } finally {
-        setLoading(false);
       }
-    };
-    getUsersData(userId).catch((err) => {
-      console.error('Error getting users name: ', err);
       setLoading(false);
     });
-  }, [userId]);
 
-  return { firstName, lastName, email, loading };
+    return () => unsubscribe();
+  }, [profileIcon, profilePicture, userId]);
+
+  return {
+    firstName,
+    lastName,
+    email,
+    profilePicture,
+    isDefaultPicture,
+    loading,
+  };
 };
