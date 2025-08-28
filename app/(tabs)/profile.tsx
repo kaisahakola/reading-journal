@@ -136,9 +136,7 @@ const Profile = () => {
               <Text style={styles.name}>
                 {firstName} {lastName}
               </Text>
-            ) : (
-              <Text>No name set</Text>
-            )}
+            ) : null}
             <Text style={styles.text}>{email}</Text>
           </>
         )}
