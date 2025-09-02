@@ -5,13 +5,12 @@ import {
   TextInput,
   TouchableWithoutFeedback,
   Keyboard,
-  KeyboardAvoidingView,
-  Platform,
 } from 'react-native';
 import { useEffect, useState } from 'react';
 import { Book, Genres, GenresList } from '@/types/book';
 import SubmitButton from './SubmitButton';
 import { Dropdown } from 'react-native-element-dropdown';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 interface BookFormProps {
   onSubmit: (bookData: Book) => void;
@@ -54,9 +53,10 @@ const BookForm = ({
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <SafeAreaView style={styles.container}>
-        <KeyboardAvoidingView
-          style={styles.keyboardAvoidingView}
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        <KeyboardAwareScrollView
+          style={styles.keyboardAwareScrollView}
+          contentContainerStyle={{ flexGrow: 1 }}
+          enableOnAndroid={true}
         >
           <Text style={styles.titleText}>{formLabel}</Text>
           <TextInput
@@ -105,7 +105,7 @@ const BookForm = ({
             style={{ ...styles.input, minHeight: 100 }}
           />
           <SubmitButton onPress={handleOnSubmit} label={submitLabel} />
-        </KeyboardAvoidingView>
+        </KeyboardAwareScrollView>
       </SafeAreaView>
     </TouchableWithoutFeedback>
   );
@@ -117,16 +117,16 @@ const styles = StyleSheet.create({
     width: '90%',
     margin: 'auto',
   },
-  keyboardAvoidingView: {
+  keyboardAwareScrollView: {
     flex: 1,
-    justifyContent: 'center',
+    paddingTop: '15%',
   },
   input: {
-    marginBottom: 15,
+    marginBottom: 10,
     padding: 15,
     borderRadius: 20,
     height: 50,
-    backgroundColor: 'white',
+    backgroundColor: 'lightgray',
     textAlignVertical: 'top',
   },
   titleText: {

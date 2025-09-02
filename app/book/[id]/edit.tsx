@@ -1,10 +1,11 @@
 import BookForm from '@/components/BookForm';
-import { SafeAreaView, StyleSheet, Button } from 'react-native';
+import { SafeAreaView, StyleSheet, Button, View } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useFetchBook } from '@/hooks/useFetchBook';
 import { updateBookById } from '@/hooks/useBooks';
 import { Book } from '@/types/book';
 import Toast from 'react-native-toast-message';
+import ButtonWithIcon from '@/components/ButtonWithIcon';
 
 const EditBook = () => {
   const router = useRouter();
@@ -33,13 +34,19 @@ const EditBook = () => {
 
   return (
     <SafeAreaView style={styles.wrapper}>
+      <View style={styles.buttonContainer}>
+        <ButtonWithIcon
+          buttonType={'goBack'}
+          featherIconName={'arrow-left'}
+          onPress={() => router.replace(`/book/${id}`)}
+        />
+      </View>
       <BookForm
         onSubmit={handleUpdate}
         submitLabel="Edit Book"
         initialValues={book}
         formLabel="Edit Book"
       />
-      <Button title="Go back" onPress={() => router.replace(`/book/${id}`)} />
     </SafeAreaView>
   );
 };
@@ -47,8 +54,11 @@ const EditBook = () => {
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    backgroundColor: 'lightgray',
+    backgroundColor: 'white',
     padding: 30,
+  },
+  buttonContainer: {
+    padding: 15,
   },
 });
 

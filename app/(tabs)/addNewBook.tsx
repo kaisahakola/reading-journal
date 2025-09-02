@@ -43,7 +43,7 @@ const AddNewBook = () => {
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    backgroundColor: 'lightgray',
+    backgroundColor: 'white',
   },
 });
 

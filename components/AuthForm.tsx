@@ -6,13 +6,12 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
-  Platform,
-  KeyboardAvoidingView,
   SafeAreaView,
 } from 'react-native';
 import { useState } from 'react';
 import { AuthData, AuthMode } from '@/types/auth';
 import SubmitButton from '@/components/SubmitButton';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 interface AuthFormProps {
   onSubmit: (activeForm: AuthMode, authData: AuthData) => void;
@@ -50,9 +49,10 @@ const AuthForm = ({
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <SafeAreaView style={styles.container}>
-        <KeyboardAvoidingView
-          style={styles.keyboardAvoidingView}
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        <KeyboardAwareScrollView
+          style={styles.keyboardAwareScrollView}
+          contentContainerStyle={{ flexGrow: 1 }}
+          enableOnAndroid={true}
         >
           <Text style={styles.title}>{formLabel}</Text>
           {error ? <Text style={styles.error}>{error}</Text> : null}
@@ -100,7 +100,7 @@ const AuthForm = ({
               <Text style={styles.link}>{link}</Text>
             </TouchableOpacity>
           </View>
-        </KeyboardAvoidingView>
+        </KeyboardAwareScrollView>
       </SafeAreaView>
     </TouchableWithoutFeedback>
   );
@@ -112,9 +112,8 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingTop: '30%',
   },
-  keyboardAvoidingView: {
+  keyboardAwareScrollView: {
     flex: 1,
-    justifyContent: 'center',
   },
   title: {
     fontSize: 32,
