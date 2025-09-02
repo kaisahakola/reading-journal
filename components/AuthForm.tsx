@@ -6,6 +6,9 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
+  Platform,
+  KeyboardAvoidingView,
+  SafeAreaView,
 } from 'react-native';
 import { useState } from 'react';
 import { AuthData, AuthMode } from '@/types/auth';
@@ -46,54 +49,59 @@ const AuthForm = ({
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.container}>
-        <Text style={styles.title}>{formLabel}</Text>
-        {error ? <Text style={styles.error}>{error}</Text> : null}
-        {activeForm === 'signup' ? (
+      <SafeAreaView style={styles.container}>
+        <KeyboardAvoidingView
+          style={styles.keyboardAvoidingView}
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        >
+          <Text style={styles.title}>{formLabel}</Text>
+          {error ? <Text style={styles.error}>{error}</Text> : null}
+          {activeForm === 'signup' ? (
+            <View>
+              <TextInput
+                style={styles.input}
+                placeholder={'First name'}
+                placeholderTextColor="#333"
+                onChangeText={setFirstName}
+                value={firstName}
+                autoCapitalize={'words'}
+              />
+              <TextInput
+                style={styles.input}
+                placeholder={'Last name'}
+                placeholderTextColor="#333"
+                onChangeText={setLastName}
+                value={lastName}
+                autoCapitalize={'words'}
+              />
+            </View>
+          ) : null}
+          <TextInput
+            style={styles.input}
+            placeholder="Email"
+            placeholderTextColor="#333"
+            onChangeText={setEmail}
+            value={email}
+            keyboardType="email-address"
+            autoCapitalize="none"
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Password"
+            placeholderTextColor="#333"
+            onChangeText={setPassword}
+            value={password}
+            secureTextEntry={true}
+          />
+          <SubmitButton onPress={handleSubmit} label={submitLabel} />
           <View>
-            <TextInput
-              style={styles.input}
-              placeholder={'First name'}
-              placeholderTextColor="#333"
-              onChangeText={setFirstName}
-              value={firstName}
-              autoCapitalize={'words'}
-            />
-            <TextInput
-              style={styles.input}
-              placeholder={'Last name'}
-              placeholderTextColor="#333"
-              onChangeText={setLastName}
-              value={lastName}
-              autoCapitalize={'words'}
-            />
+            <Text style={styles.linkText}>{linkText}</Text>
+            <TouchableOpacity onPress={onToggleForm}>
+              <Text style={styles.link}>{link}</Text>
+            </TouchableOpacity>
           </View>
-        ) : null}
-        <TextInput
-          style={styles.input}
-          placeholder="Email"
-          placeholderTextColor="#333"
-          onChangeText={setEmail}
-          value={email}
-          keyboardType="email-address"
-          autoCapitalize="none"
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Password"
-          placeholderTextColor="#333"
-          onChangeText={setPassword}
-          value={password}
-          secureTextEntry={true}
-        />
-        <SubmitButton onPress={handleSubmit} label={submitLabel} />
-        <View>
-          <Text style={styles.linkText}>{linkText}</Text>
-          <TouchableOpacity onPress={onToggleForm}>
-            <Text style={styles.link}>{link}</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+        </KeyboardAvoidingView>
+      </SafeAreaView>
     </TouchableWithoutFeedback>
   );
 };
@@ -103,6 +111,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'lightgray',
     width: '100%',
     paddingTop: '30%',
+  },
+  keyboardAvoidingView: {
+    flex: 1,
+    justifyContent: 'center',
   },
   title: {
     fontSize: 32,

@@ -147,6 +147,7 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     padding: 30,
+    paddingTop: '20%',
     alignItems: 'center',
     backgroundColor: 'lightgray',
     borderRadius: 30,
