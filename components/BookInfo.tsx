@@ -2,7 +2,6 @@ import { BookWithIdAndDate } from '@/types/book';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import StarRating from './StarRating';
 import { parseDate } from '@/utils/date';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface BookInfoProps {
   book: BookWithIdAndDate;
@@ -10,7 +9,7 @@ interface BookInfoProps {
 
 const BookInfo = ({ book }: BookInfoProps) => {
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       {book.createdAt ? (
         <Text style={styles.date}>{parseDate(book.createdAt)}</Text>
       ) : null}
@@ -23,7 +22,7 @@ const BookInfo = ({ book }: BookInfoProps) => {
           <Text style={styles.note}>{book.note}</Text>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 

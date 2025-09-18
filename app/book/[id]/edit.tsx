@@ -56,7 +56,6 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     backgroundColor: 'white',
-    padding: 30,
   },
   buttonContainer: {
     padding: 15,

@@ -137,22 +137,22 @@ const Profile = () => {
 
         <Text style={styles.text}>Books in your journal: {books.length}</Text>
       </View>
-      <View style={styles.logoutBtn}>
-        <SubmitButton onPress={handleLogout} label="Logout" />
-      </View>
+      <SubmitButton onPress={handleLogout} label="Logout" />
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: '30%',
-    padding: 10,
+    marginTop: '10%',
     flex: 1,
+    width: '90%',
+    margin: 'auto',
   },
   wrapper: {
     alignItems: 'center',
     padding: 15,
+    height: '77%', // this is temporary until more content is added to the profile page
   },
   title: {
     fontFamily: 'Crafteds',
@@ -169,13 +169,6 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150,
     borderRadius: 100,
-  },
-  logoutBtn: {
-    width: '100%',
-    position: 'absolute',
-    bottom: 110,
-    alignItems: 'center',
-    padding: 15,
   },
 });
 

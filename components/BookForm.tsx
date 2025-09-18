@@ -4,13 +4,13 @@ import {
   TextInput,
   TouchableWithoutFeedback,
   Keyboard,
+  View,
 } from 'react-native';
 import { useEffect, useState } from 'react';
 import { Book, Genres, GenresList } from '@/types/book';
 import SubmitButton from './SubmitButton';
 import { Dropdown } from 'react-native-element-dropdown';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface BookFormProps {
   onSubmit: (bookData: Book) => void;
@@ -52,7 +52,7 @@ const BookForm = ({
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         <KeyboardAwareScrollView
           style={styles.keyboardAwareScrollView}
           contentContainerStyle={{ flexGrow: 1 }}
@@ -106,7 +106,7 @@ const BookForm = ({
           />
           <SubmitButton onPress={handleOnSubmit} label={submitLabel} />
         </KeyboardAwareScrollView>
-      </SafeAreaView>
+      </View>
     </TouchableWithoutFeedback>
   );
 };
