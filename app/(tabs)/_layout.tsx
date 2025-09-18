@@ -1,9 +1,19 @@
 import { Tabs } from 'expo-router';
 import { FontAwesome } from '@expo/vector-icons';
+import { StyleSheet } from 'react-native';
 
 const TabLayout = () => {
   return (
-    <Tabs screenOptions={{ headerShown: false }}>
+    <Tabs
+      screenOptions={{
+        headerShown: false,
+        tabBarActiveTintColor: '#4A90E2',
+        tabBarInactiveTintColor: '#888',
+        tabBarStyle: styles.tabBar,
+        tabBarIconStyle: styles.tabBarIcon,
+        tabBarLabelStyle: styles.tabBarLabel,
+      }}
+    >
       <Tabs.Screen
         name="home"
         options={{
@@ -34,5 +44,28 @@ const TabLayout = () => {
     </Tabs>
   );
 };
+
+const styles = StyleSheet.create({
+  tabBar: {
+    backgroundColor: 'lightgray',
+    borderTopWidth: 0,
+    shadowOpacity: 0.1,
+    borderRadius: 30,
+    bottom: 30,
+    position: 'absolute',
+    marginLeft: 20,
+    marginRight: 20,
+    height: 75,
+  },
+  tabBarIcon: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  tabBarLabel: {
+    fontSize: 12,
+    fontWeight: '600',
+  },
+});
 
 export default TabLayout;

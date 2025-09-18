@@ -6,7 +6,10 @@ const BookList = () => {
   const { books } = useFetchAllBooks();
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={{ paddingBottom: 90 }}
+    >
       {books.map((book) => (
         <View key={book.id}>
           <BookItem book={book} />

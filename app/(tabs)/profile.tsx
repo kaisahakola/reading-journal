@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
   logoutBtn: {
     width: '100%',
     position: 'absolute',
-    bottom: 10,
+    bottom: 110,
     alignItems: 'center',
     padding: 15,
   },
