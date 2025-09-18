@@ -1,11 +1,12 @@
 import BookForm from '@/components/BookForm';
-import { SafeAreaView, StyleSheet, Button, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useFetchBook } from '@/hooks/useFetchBook';
 import { updateBookById } from '@/hooks/useBooks';
 import { Book } from '@/types/book';
 import Toast from 'react-native-toast-message';
 import ButtonWithIcon from '@/components/ButtonWithIcon';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const EditBook = () => {
   const router = useRouter();

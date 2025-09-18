@@ -1,10 +1,11 @@
 import { useRouter } from 'expo-router';
-import { View, StyleSheet, Alert, SafeAreaView } from 'react-native';
+import { View, StyleSheet, Alert } from 'react-native';
 import { deleteBookById } from '@/hooks/useBooks';
 import Toast from 'react-native-toast-message';
 import { useFetchBook } from '@/hooks/useFetchBook';
 import BookInfo from '@/components/BookInfo';
 import ButtonWithIcon from '@/components/ButtonWithIcon';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const BookDetailsScreen = () => {
   const router = useRouter();

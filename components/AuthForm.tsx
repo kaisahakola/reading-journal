@@ -6,12 +6,12 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
-  SafeAreaView,
 } from 'react-native';
 import { useState } from 'react';
 import { AuthData, AuthMode } from '@/types/auth';
 import SubmitButton from '@/components/SubmitButton';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface AuthFormProps {
   onSubmit: (activeForm: AuthMode, authData: AuthData) => void;

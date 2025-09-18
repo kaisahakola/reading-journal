@@ -1,11 +1,4 @@
-import {
-  Text,
-  SafeAreaView,
-  StyleSheet,
-  View,
-  Image,
-  TouchableOpacity,
-} from 'react-native';
+import { Text, StyleSheet, View, Image, TouchableOpacity } from 'react-native';
 import { signOut, updateProfile, getAuth } from 'firebase/auth';
 import { useRouter } from 'expo-router';
 import SubmitButton from '@/components/SubmitButton';
@@ -16,6 +9,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { setDoc } from '@firebase/firestore';
 import { doc } from 'firebase/firestore';
 import { db } from '@/config/firebase';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Profile = () => {
   const router = useRouter();

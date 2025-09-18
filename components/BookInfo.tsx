@@ -1,7 +1,8 @@
 import { BookWithIdAndDate } from '@/types/book';
-import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import StarRating from './StarRating';
 import { parseDate } from '@/utils/date';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface BookInfoProps {
   book: BookWithIdAndDate;
