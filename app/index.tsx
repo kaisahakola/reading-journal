@@ -13,6 +13,8 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 import { setDoc } from '@firebase/firestore';
 import { doc } from 'firebase/firestore';
+import { getAuthErrorMessages } from '@/utils/getAuthErrorMessages';
+import Toast from 'react-native-toast-message';
 
 const Index = () => {
   const [activeForm, setActiveForm] = useState<'login' | 'signup' | ''>('');
@@ -20,34 +22,52 @@ const Index = () => {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const snapPoints = ['65%', '90%'];
 
+  const showToast = (text: string) => {
+    Toast.show({
+      type: 'error',
+      text1: text,
+    });
+  };
+
   const handleAuth = async (
     authMode: AuthMode,
     { email, password, firstName, lastName }: AuthData,
   ) => {
     if (authMode === 'login') {
-      await signInWithEmailAndPassword(auth, email, password);
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        router.replace('/(tabs)/home');
+      } catch (err: any) {
+        console.log(err.code);
+        showToast(getAuthErrorMessages(err.code));
+      }
     } else if (authMode === 'signup') {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password,
-      );
-      const user = userCredential.user;
+      try {
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password,
+        );
+        const user = userCredential.user;
 
-      await updateProfile(user, {
-        displayName: `${firstName} ${lastName}`,
-      });
+        await updateProfile(user, {
+          displayName: `${firstName} ${lastName}`,
+        });
 
-      await user.reload();
+        await user.reload();
 
-      await setDoc(doc(db, 'users', user.uid), {
-        firstName,
-        lastName,
-        email: user.email,
-        createdAt: new Date(),
-      });
+        await setDoc(doc(db, 'users', user.uid), {
+          firstName,
+          lastName,
+          email: user.email,
+          createdAt: new Date(),
+        });
+        router.replace('/(tabs)/home');
+      } catch (err: any) {
+        console.log(err.code);
+        showToast(getAuthErrorMessages(err.code));
+      }
     }
-    router.replace('/(tabs)/home');
   };
 
   const handleSelectForm = (authMode: AuthMode) => {
