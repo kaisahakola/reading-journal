@@ -1,5 +1,6 @@
-import { Text, StyleSheet, SafeAreaView } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 import BookList from '@/components/BookList';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Home = () => {
   return (
