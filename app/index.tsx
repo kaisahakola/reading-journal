@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
+  sendPasswordResetEmail,
 } from 'firebase/auth';
 import { auth, db } from '@/config/firebase';
 import { AuthData, AuthMode } from '@/types/auth';
@@ -17,15 +18,18 @@ import { getAuthErrorMessages } from '@/utils/getAuthErrorMessages';
 import Toast from 'react-native-toast-message';
 
 const Index = () => {
-  const [activeForm, setActiveForm] = useState<'login' | 'signup' | ''>('');
+  const [activeForm, setActiveForm] = useState<
+    'login' | 'signup' | 'resetPassword' | ''
+  >('');
   const [sheetIndex, setSheetIndex] = useState<number>(0);
   const bottomSheetRef = useRef<BottomSheet>(null);
   const snapPoints = ['65%', '90%'];
 
-  const showToast = (text: string) => {
+  const showToast = (type: string, text1: string, text2?: string) => {
     Toast.show({
-      type: 'error',
-      text1: text,
+      type: type,
+      text1: text1,
+      text2: text2,
     });
   };
 
@@ -39,7 +43,7 @@ const Index = () => {
         router.replace('/(tabs)/home');
       } catch (err: any) {
         console.log(err.code);
-        showToast(getAuthErrorMessages(err.code));
+        showToast('error', getAuthErrorMessages(err.code));
       }
     } else if (authMode === 'signup') {
       try {
@@ -65,7 +69,23 @@ const Index = () => {
         router.replace('/(tabs)/home');
       } catch (err: any) {
         console.log(err.code);
-        showToast(getAuthErrorMessages(err.code));
+        showToast('error', getAuthErrorMessages(err.code));
+      }
+    } else if (authMode === 'resetPassword') {
+      try {
+        await sendPasswordResetEmail(auth, email);
+        showToast(
+          'success',
+          'Password reset link has been sent.',
+          'Check your email.',
+        );
+      } catch (err: any) {
+        showToast(
+          'error',
+          'Something went wrong.',
+          'Please check the email address you provided.',
+        );
+        console.error(err.message);
       }
     }
   };
@@ -74,6 +94,10 @@ const Index = () => {
     setActiveForm(authMode);
     setSheetIndex(1);
     bottomSheetRef.current?.snapToIndex(1);
+  };
+
+  const onToggleForm = (form: AuthMode) => {
+    setActiveForm(form);
   };
 
   return (
@@ -122,17 +146,27 @@ const Index = () => {
               formLabel={'Login'}
               linkText={"Don't have an account yet?"}
               link={'Sign up'}
-              onToggleForm={() => setActiveForm('signup')}
+              onToggleForm={onToggleForm}
               activeForm={activeForm}
             />
-          ) : (
+          ) : activeForm === 'signup' ? (
             <AuthForm
               onSubmit={handleAuth}
               submitLabel={'Sign Up'}
               formLabel={'Sign up'}
               linkText={'Already have an account?'}
               link={'Login'}
-              onToggleForm={() => setActiveForm('login')}
+              onToggleForm={onToggleForm}
+              activeForm={activeForm}
+            />
+          ) : (
+            <AuthForm
+              onSubmit={handleAuth}
+              submitLabel={'Reset Password'}
+              formLabel={'Reset Password'}
+              linkText={'Already have an account?'}
+              link={'Login'}
+              onToggleForm={onToggleForm}
               activeForm={activeForm}
             />
           )}

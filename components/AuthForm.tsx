@@ -19,8 +19,8 @@ interface AuthFormProps {
   formLabel: string;
   linkText: string;
   link: string;
-  onToggleForm: () => void;
-  activeForm: 'login' | 'signup';
+  onToggleForm: (form: AuthMode) => void;
+  activeForm: 'login' | 'signup' | 'resetPassword';
 }
 
 const AuthForm = ({
@@ -85,20 +85,35 @@ const AuthForm = ({
             keyboardType="email-address"
             autoCapitalize="none"
           />
-          <TextInput
-            style={styles.input}
-            placeholder="Password"
-            placeholderTextColor="#333"
-            onChangeText={setPassword}
-            value={password}
-            secureTextEntry={true}
-          />
+          {activeForm === 'signup' || activeForm === 'login' ? (
+            <TextInput
+              style={styles.input}
+              placeholder="Password"
+              placeholderTextColor="#333"
+              onChangeText={setPassword}
+              value={password}
+              secureTextEntry={true}
+            />
+          ) : null}
           <SubmitButton onPress={handleSubmit} label={submitLabel} />
           <View>
             <Text style={styles.linkText}>{linkText}</Text>
-            <TouchableOpacity onPress={onToggleForm}>
+            <TouchableOpacity
+              onPress={() =>
+                onToggleForm(activeForm === 'login' ? 'signup' : 'login')
+              }
+            >
               <Text style={styles.link}>{link}</Text>
             </TouchableOpacity>
+
+            {activeForm === 'login' ? (
+              <>
+                <Text style={styles.linkText}>Forgot your password?</Text>
+                <TouchableOpacity onPress={() => onToggleForm('resetPassword')}>
+                  <Text style={styles.link}>Reset</Text>
+                </TouchableOpacity>
+              </>
+            ) : null}
           </View>
         </KeyboardAwareScrollView>
       </SafeAreaView>

@@ -5,4 +5,4 @@ export interface AuthData {
   lastName?: string;
 }
 
-export type AuthMode = 'login' | 'signup';
+export type AuthMode = 'login' | 'signup' | 'resetPassword';
