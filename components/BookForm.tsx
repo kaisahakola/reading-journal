@@ -11,6 +11,7 @@ import { Book, Genres, GenresList } from '@/types/book';
 import SubmitButton from './SubmitButton';
 import { Dropdown } from 'react-native-element-dropdown';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import StarRating from 'react-native-star-rating-widget';
 
 interface BookFormProps {
   onSubmit: (bookData: Book) => void;
@@ -27,7 +28,7 @@ const BookForm = ({
 }: BookFormProps) => {
   const [title, setTitle] = useState<string>('');
   const [author, setAuthor] = useState<string>('');
-  const [rating, setRating] = useState<string>('');
+  const [rating, setRating] = useState<number>(0);
   const [note, setNote] = useState<string>('');
   const [genre, setGenre] = useState<Genres>(null);
 
@@ -35,7 +36,7 @@ const BookForm = ({
     if (initialValues) {
       setTitle(initialValues.title);
       setAuthor(initialValues.author);
-      setRating(initialValues.rating.toString());
+      setRating(initialValues.rating);
       setNote(initialValues.note);
       setGenre(initialValues.genre);
     }
@@ -44,7 +45,7 @@ const BookForm = ({
   const handleOnSubmit = () => {
     setTitle('');
     setAuthor('');
-    setRating('');
+    setRating(0);
     setNote('');
     setGenre(null);
     onSubmit({ title, author, rating: Number(rating), note, genre });
@@ -73,14 +74,7 @@ const BookForm = ({
             onChangeText={setAuthor}
             style={styles.input}
           />
-          <TextInput
-            placeholder="Rating"
-            placeholderTextColor="#333"
-            keyboardType="numeric"
-            value={rating}
-            onChangeText={setRating}
-            style={styles.input}
-          />
+
           <Dropdown
             style={styles.input}
             data={GenresList}
@@ -104,6 +98,14 @@ const BookForm = ({
             onChangeText={setNote}
             style={{ ...styles.input, minHeight: 100 }}
           />
+          <View style={styles.ratingInput}>
+            <Text style={styles.ratingText}>Give the book a rating:</Text>
+            <StarRating
+              rating={rating}
+              onChange={setRating}
+              enableHalfStar={false}
+            />
+          </View>
           <SubmitButton onPress={handleOnSubmit} label={submitLabel} />
         </KeyboardAwareScrollView>
       </View>
@@ -135,6 +137,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 20,
     fontFamily: 'Crafteds',
+  },
+  ratingInput: {
+    marginTop: 5,
+    marginBottom: 10,
+  },
+  ratingText: {
+    fontSize: 14,
+    padding: 10,
   },
 });
 
