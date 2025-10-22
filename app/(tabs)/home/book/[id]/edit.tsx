@@ -1,5 +1,5 @@
 import BookForm from '@/components/BookForm';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useFetchBook } from '@/hooks/useFetchBook';
 import { updateBookById } from '@/hooks/useBooks';
@@ -30,18 +30,16 @@ const EditBook = () => {
     }
     await updateBookById(id, userId, bookData);
     showToast();
-    router.replace(`/book/${id}`);
+    router.replace(`/home/book/${id}`);
   };
 
   return (
     <SafeAreaView style={styles.wrapper}>
-      <View style={styles.buttonContainer}>
-        <ButtonWithIcon
-          buttonType={'goBack'}
-          featherIconName={'arrow-left'}
-          onPress={() => router.replace(`/book/${id}`)}
-        />
-      </View>
+      <ButtonWithIcon
+        buttonType={'goBack'}
+        featherIconName={'arrow-left'}
+        onPress={() => router.replace(`/home/book/${id}`)}
+      />
       <BookForm
         onSubmit={handleUpdate}
         submitLabel="Edit Book"
@@ -56,9 +54,7 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     backgroundColor: 'white',
-  },
-  buttonContainer: {
-    padding: 15,
+    paddingHorizontal: 15,
   },
 });
 

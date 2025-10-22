@@ -65,7 +65,7 @@ const BookDetailsScreen = () => {
           <ButtonWithIcon
             buttonType={'edit'}
             featherIconName={'edit-2'}
-            onPress={() => router.push(`/book/${id}/edit`)}
+            onPress={() => router.push(`/home/book/${id}/edit`)}
           />
         </View>
       </View>
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
   },
   buttonsContainer: {
     flexDirection: 'row',
-    padding: 15,
+    paddingHorizontal: 15,
   },
 });
 
