@@ -4,7 +4,9 @@ import {
   TextInput,
   TouchableWithoutFeedback,
   Keyboard,
+  ScrollView,
   View,
+  Image,
 } from 'react-native';
 import { useEffect, useState } from 'react';
 import { Book, Genres, GenresList } from '@/types/book';
@@ -31,6 +33,7 @@ const BookForm = ({
   const [rating, setRating] = useState<number>(0);
   const [note, setNote] = useState<string>('');
   const [genre, setGenre] = useState<Genres>(null);
+  const [thumbnail, setThumbnail] = useState<string | null>(null);
 
   useEffect(() => {
     if (initialValues) {
@@ -39,6 +42,7 @@ const BookForm = ({
       setRating(initialValues.rating);
       setNote(initialValues.note);
       setGenre(initialValues.genre);
+      setThumbnail(initialValues.thumbnail ? initialValues.thumbnail : null);
     }
   }, [initialValues]);
 
@@ -48,18 +52,20 @@ const BookForm = ({
     setRating(0);
     setNote('');
     setGenre(null);
-    onSubmit({ title, author, rating: Number(rating), note, genre });
+    setThumbnail(null);
+    onSubmit({ title, author, rating: Number(rating), note, genre, thumbnail });
   };
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
+        <Text style={styles.titleText}>{formLabel}</Text>
         <KeyboardAwareScrollView
           style={styles.keyboardAwareScrollView}
-          contentContainerStyle={{ flexGrow: 1 }}
+          contentContainerStyle={{ flexGrow: 1, paddingBottom: 75 }}
           enableOnAndroid={true}
+          scrollEnabled={true}
         >
-          <Text style={styles.titleText}>{formLabel}</Text>
           <TextInput
             placeholder="Title"
             placeholderTextColor="#333"
@@ -106,9 +112,16 @@ const BookForm = ({
               enableHalfStar={false}
             />
           </View>
+
+          {initialValues?.thumbnail && (
+            <Image
+              style={styles.thumbnail}
+              source={{ uri: initialValues?.thumbnail }}
+            />
+          )}
           <SubmitButton onPress={handleOnSubmit} label={submitLabel} />
         </KeyboardAwareScrollView>
-      </View>
+      </ScrollView>
     </TouchableWithoutFeedback>
   );
 };
@@ -116,12 +129,11 @@ const BookForm = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: '90%',
-    margin: 'auto',
+    marginBottom: 75,
   },
   keyboardAwareScrollView: {
     flex: 1,
-    paddingTop: '15%',
+    paddingTop: '5%',
   },
   input: {
     marginBottom: 10,
@@ -135,16 +147,24 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 20,
     fontFamily: 'Crafteds',
   },
   ratingInput: {
     marginTop: 5,
     marginBottom: 10,
+    alignSelf: 'center',
   },
   ratingText: {
     fontSize: 14,
     padding: 10,
+    alignSelf: 'center',
+  },
+  thumbnail: {
+    width: '50%',
+    aspectRatio: 2 / 3,
+    resizeMode: 'cover',
+    borderRadius: 10,
+    alignSelf: 'center',
   },
 });
 

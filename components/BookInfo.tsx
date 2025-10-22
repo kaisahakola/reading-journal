@@ -1,5 +1,5 @@
 import { BookWithIdAndDate } from '@/types/book';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 import StarRating from './StarRating';
 import { parseDate } from '@/utils/date';
 
@@ -13,13 +13,16 @@ const BookInfo = ({ book }: BookInfoProps) => {
       {book.createdAt ? (
         <Text style={styles.date}>{parseDate(book.createdAt)}</Text>
       ) : null}
-      <ScrollView>
+      <ScrollView contentContainerStyle={{ flexGrow: 1, paddingBottom: 50 }}>
         <View style={styles.textContainer}>
           <Text style={styles.title}>{book.title}</Text>
           <Text style={styles.author}>{book.author}</Text>
           <Text style={styles.genre}>{book.genre}</Text>
           <StarRating rating={book.rating} size={'big'} />
           <Text style={styles.note}>{book.note}</Text>
+          {book.thumbnail ? (
+            <Image style={styles.thumbnail} source={{ uri: book.thumbnail }} />
+          ) : null}
         </View>
       </ScrollView>
     </View>
@@ -54,12 +57,19 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 20,
     width: '80%',
-    minHeight: '20%',
     fontSize: 16,
   },
   genre: {
     fontFamily: 'Helvetica',
     marginBottom: 15,
+  },
+  thumbnail: {
+    width: '50%',
+    aspectRatio: 2 / 3,
+    resizeMode: 'cover',
+    borderRadius: 10,
+    marginTop: 10,
+    marginBottom: 20,
   },
 });
 

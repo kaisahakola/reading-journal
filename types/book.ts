@@ -4,6 +4,7 @@ export interface Book {
   note: string;
   rating: number;
   genre: Genres;
+  thumbnail: string | null;
 }
 
 export type BookWithId = Book & { id: string };

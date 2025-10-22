@@ -13,7 +13,7 @@ const BookItem = ({ book }: BookItemProps) => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => router.push(`/book/${book.id}`)}>
+      <TouchableOpacity onPress={() => router.push(`/home/book/${book.id}`)}>
         <Text style={styles.title}>{book.title}</Text>
         <Text style={styles.author}>{book.author}</Text>
         <StarRating rating={book.rating} size={'small'} />
