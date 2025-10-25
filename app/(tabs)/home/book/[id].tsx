@@ -53,7 +53,7 @@ const BookDetailsScreen = () => {
         <ButtonWithIcon
           buttonType={'goBack'}
           featherIconName={'arrow-left'}
-          onPress={() => router.replace('/(tabs)/home')}
+          onPress={() => router.back()}
         />
 
         <View style={styles.editAndDeleteButtons}>

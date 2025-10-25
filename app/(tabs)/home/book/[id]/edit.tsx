@@ -38,7 +38,7 @@ const EditBook = () => {
       <ButtonWithIcon
         buttonType={'goBack'}
         featherIconName={'arrow-left'}
-        onPress={() => router.replace(`/home/book/${id}`)}
+        onPress={() => router.back()}
       />
       <BookForm
         onSubmit={handleUpdate}
