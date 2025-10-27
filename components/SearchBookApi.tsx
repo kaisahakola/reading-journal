@@ -27,6 +27,7 @@ const SearchBookApi = ({ onSelectBook }: SearchBookApiProps) => {
 
   const searchBooks = async () => {
     try {
+      Keyboard.dismiss();
       setActivateLoadingAnimation(true);
       setBookListVisible(false);
       const response = await fetch(
