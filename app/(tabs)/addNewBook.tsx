@@ -1,6 +1,6 @@
 import { StyleSheet, TouchableOpacity, Text, View } from 'react-native';
 import { Book } from '@/types/book';
-import { addBook } from '@/hooks/useBooks';
+import { addBook } from '@/services/bookService';
 import { auth } from '@/config/firebase';
 import { useRouter } from 'expo-router';
 import Toast from 'react-native-toast-message';

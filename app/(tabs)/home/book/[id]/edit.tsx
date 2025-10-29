@@ -2,7 +2,7 @@ import BookForm from '@/components/BookForm';
 import { StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useFetchBook } from '@/hooks/useFetchBook';
-import { updateBookById } from '@/hooks/useBooks';
+import { updateBookById } from '@/services/bookService';
 import { Book } from '@/types/book';
 import Toast from 'react-native-toast-message';
 import ButtonWithIcon from '@/components/ButtonWithIcon';

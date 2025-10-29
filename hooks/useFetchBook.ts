@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { BookWithId } from '@/types/book';
 import { useLocalSearchParams } from 'expo-router';
 import { auth } from '@/config/firebase';
-import { getBookById } from '@/hooks/useBooks';
+import { getBookById } from '@/services/bookService';
 
 export const useFetchBook = () => {
   const [book, setBook] = useState<BookWithId>();

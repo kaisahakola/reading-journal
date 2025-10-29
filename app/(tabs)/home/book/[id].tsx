@@ -1,6 +1,6 @@
 import { useRouter } from 'expo-router';
 import { View, StyleSheet, Alert } from 'react-native';
-import { deleteBookById } from '@/hooks/useBooks';
+import { deleteBookById } from '@/services/bookService';
 import Toast from 'react-native-toast-message';
 import { useFetchBook } from '@/hooks/useFetchBook';
 import BookInfo from '@/components/BookInfo';
