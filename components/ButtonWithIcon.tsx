@@ -7,12 +7,17 @@ interface ButtonWithIconProps {
   buttonType: ButtonType;
   featherIconName: React.ComponentProps<typeof Feather>['name'];
   onPress: () => void;
+  size?: number;
 }
 
 const ButtonWithIcon = (props: ButtonWithIconProps) => {
   return (
     <TouchableOpacity style={styles.container} onPress={props.onPress}>
-      <Feather name={props.featherIconName} size={24} color={'black'} />
+      <Feather
+        name={props.featherIconName}
+        size={props.size ? props.size : 24}
+        color={'black'}
+      />
     </TouchableOpacity>
   );
 };
@@ -21,7 +26,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'lightgray',
     borderRadius: 50,
-    padding: 15,
+    padding: 10,
     alignSelf: 'flex-start',
   },
 });
