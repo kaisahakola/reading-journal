@@ -28,9 +28,15 @@ const EditBook = () => {
       console.error('No user found');
       return [];
     }
-    await updateBookById(id, userId, bookData);
-    showToast();
-    router.replace(`/home/book/${id}`);
+
+    try {
+      await updateBookById(id, userId, bookData);
+      showToast();
+      router.back();
+      console.log('Book updated successfully!');
+    } catch (err) {
+      console.error('Error updating book: ', err);
+    }
   };
 
   return (
@@ -42,7 +48,7 @@ const EditBook = () => {
       />
       <BookForm
         onSubmit={handleUpdate}
-        submitLabel="Edit Book"
+        submitLabel="Save changes"
         initialValues={book}
         formLabel="Edit Book"
       />

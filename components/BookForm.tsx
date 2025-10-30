@@ -47,13 +47,15 @@ const BookForm = ({
   }, [initialValues]);
 
   const handleOnSubmit = () => {
-    setTitle('');
-    setAuthor('');
-    setRating(0);
-    setNote('');
-    setGenre(null);
-    setThumbnail(null);
     onSubmit({ title, author, rating: Number(rating), note, genre, thumbnail });
+    if (!initialValues) {
+      setTitle('');
+      setAuthor('');
+      setRating(0);
+      setNote('');
+      setGenre(null);
+      setThumbnail(null);
+    }
   };
 
   return (

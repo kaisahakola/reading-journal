@@ -1,4 +1,4 @@
-import { useRouter } from 'expo-router';
+import { useFocusEffect, useRouter } from 'expo-router';
 import { View, StyleSheet, Alert } from 'react-native';
 import { deleteBookById } from '@/services/bookService';
 import Toast from 'react-native-toast-message';
@@ -6,10 +6,11 @@ import { useFetchBook } from '@/hooks/useFetchBook';
 import BookInfo from '@/components/BookInfo';
 import ButtonWithIcon from '@/components/ButtonWithIcon';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useCallback } from 'react';
 
 const BookDetailsScreen = () => {
   const router = useRouter();
-  const { book, id, userId } = useFetchBook();
+  const { book, id, userId, refetch } = useFetchBook();
 
   const showToast = () => {
     Toast.show({
@@ -46,6 +47,12 @@ const BookDetailsScreen = () => {
       ],
     );
   };
+
+  useFocusEffect(
+    useCallback(() => {
+      refetch();
+    }, [refetch]),
+  );
 
   return (
     <SafeAreaView style={styles.container}>
