@@ -1,0 +1,18 @@
+export const GENRE_COLORS: Record<string, string> = {
+  fantasy: '#FF6384',
+  romance: '#36A2EB',
+  'non-fiction': '#4BC0C0',
+  horror: '#FF9F40',
+  fiction: '#FFCE56',
+  'science-fiction': '#6d56ff',
+  thriller: '#ff0000',
+  'historical-fiction': '#56ff00',
+  biography: '#ddf476',
+  'self-help': '#0205a8',
+  poetry: '#ff6363',
+  'young adult': '#ff63f2',
+  children: '#63ffbe',
+  classics: '#e3ffed',
+  other: '#044a0b',
+  default: '#505050',
+};

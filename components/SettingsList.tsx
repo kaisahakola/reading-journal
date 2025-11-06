@@ -22,7 +22,12 @@ const SettingsList = () => {
           style={{ marginLeft: 'auto' }}
         />
       </TouchableOpacity>
-      <TouchableOpacity style={styles.listItem} onPress={() => {}}>
+      <TouchableOpacity
+        style={styles.listItem}
+        onPress={() => {
+          router.push('/(tabs)/profile/statistics');
+        }}
+      >
         <Text style={styles.listItemText}>Statistics</Text>
         <Feather
           name="chevron-right"
