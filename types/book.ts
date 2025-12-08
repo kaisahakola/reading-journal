@@ -15,6 +15,10 @@ export type BookWithIdAndDate = Book & {
   updatedAt?: string;
 };
 
+export interface BookTitle {
+  title: string;
+}
+
 export type Genres =
   | null
   | 'fiction'

@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Book, BookWithIdAndDate } from '@/types/book';
+import { Book, BookWithIdAndDate, BookTitle } from '@/types/book';
 import { auth, db } from '@/config/firebase';
 import { collection, onSnapshot, query } from 'firebase/firestore';
 
 export const useFetchAllBooks = () => {
   const [books, setBooks] = useState<BookWithIdAndDate[]>([]);
+  const [titles, setTitles] = useState<BookTitle[]>([]);
   const userId = auth.currentUser?.uid;
 
   useEffect(() => {
@@ -17,10 +18,14 @@ export const useFetchAllBooks = () => {
         ...(doc.data() as Book),
       }));
       setBooks(allBooks);
+      const allTitles: BookTitle[] = querySnapshot.docs.map((doc) => ({
+        title: doc.data().title,
+      }));
+      setTitles(allTitles);
     });
 
     return () => unsubscribe();
   }, [userId]);
 
-  return { books, userId };
+  return { books, titles, userId };
 };

@@ -38,7 +38,9 @@ const SettingsList = () => {
       </TouchableOpacity>
       <TouchableOpacity
         style={[styles.listItem, { borderBottomWidth: 0 }]}
-        onPress={() => {}}
+        onPress={() => {
+          router.push('/(tabs)/profile/recommendations');
+        }}
       >
         <Text style={styles.listItemText}>Book recommendations</Text>
         <Feather
