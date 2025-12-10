@@ -5,10 +5,12 @@ import { useRouter } from 'expo-router';
 import { PieChart } from 'react-native-gifted-charts';
 import { useFetchGenres } from '@/hooks/useFetchGenres';
 import { getPercent } from '@/utils/getPercent';
+import { useFetchAllBooks } from '@/hooks/useFetchAllBooks';
 
 const Statistics = () => {
   const router = useRouter();
-  const { genreStats, numAllGenres } = useFetchGenres();
+  const { genreStats } = useFetchGenres();
+  const { books } = useFetchAllBooks()
 
   return (
     <SafeAreaView style={styles.container}>
@@ -36,7 +38,7 @@ const Statistics = () => {
                 style={[styles.legendDot, { backgroundColor: item.color }]}
               />
               <Text style={styles.legendLabel}>
-                {item.label}: {getPercent(item.value, numAllGenres)}
+                {item.label}: {getPercent(item.value, books.length)}
               </Text>
             </View>
           ))}

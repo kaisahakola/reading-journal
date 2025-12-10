@@ -5,7 +5,7 @@ import { GENRE_COLORS } from '@/utils/colors';
 export const useFetchGenres = () => {
   const { books } = useFetchAllBooks();
 
-  const { genreStats, numAllGenres } = useMemo(() => {
+  const { genreStats } = useMemo(() => {
     const genreCount: Record<string, number> = {};
     books.forEach((book) => {
       if (book.genre) {
@@ -20,10 +20,8 @@ export const useFetchGenres = () => {
       color: GENRE_COLORS[genre] || GENRE_COLORS.default,
     }));
 
-    const totalGenres = stats.length;
-
-    return { genreStats: stats, numAllGenres: totalGenres };
+    return { genreStats: stats };
   }, [books]);
 
-  return { genreStats, numAllGenres };
+  return { genreStats };
 };
