@@ -2,11 +2,11 @@ import { StyleSheet, TouchableOpacity, Text, View } from 'react-native';
 import { Book } from '@/types/book';
 import { addBook } from '@/services/bookService';
 import { auth } from '@/config/firebase';
-import { useRouter } from 'expo-router';
+import { useRouter, useFocusEffect } from 'expo-router';
 import Toast from 'react-native-toast-message';
 import BookForm from '@/components/BookForm';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import SearchBookApi from '@/components/SearchBookApi';
 import ButtonWithIcon from '@/components/ButtonWithIcon';
 import { BookApiData } from '@/types/bookApi';
@@ -16,6 +16,14 @@ const AddNewBook = () => {
   const [showBookApiSearch, setShowBookApiSearch] = useState(false);
   const [selectedBook, setSelectedBook] = useState<BookApiData | null>(null);
   const router = useRouter();
+
+  useFocusEffect(
+    useCallback(() => {
+      setShowForm(false);
+      setShowBookApiSearch(false);
+      setSelectedBook(null);
+    }, []),
+  );
 
   const showToast = () => {
     Toast.show({
