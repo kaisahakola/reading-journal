@@ -46,6 +46,14 @@ const Index = () => {
         showToast('error', getAuthErrorMessages(err.code));
       }
     } else if (authMode === 'signup') {
+      if (!email || !password) {
+        showToast('error', 'Please enter an email and password.');
+        return;
+      }
+      if (!firstName || !lastName) {
+        showToast('error', 'Please enter your first and last name.');
+        return;
+      }
       try {
         const userCredential = await createUserWithEmailAndPassword(
           auth,
