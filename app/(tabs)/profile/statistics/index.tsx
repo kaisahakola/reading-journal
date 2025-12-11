@@ -10,7 +10,7 @@ import { useFetchAllBooks } from '@/hooks/useFetchAllBooks';
 const Statistics = () => {
   const router = useRouter();
   const { genreStats } = useFetchGenres();
-  const { books } = useFetchAllBooks()
+  const { books } = useFetchAllBooks();
 
   return (
     <SafeAreaView style={styles.container}>
