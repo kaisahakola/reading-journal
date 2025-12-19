@@ -37,7 +37,7 @@ const BookDetailsScreen = () => {
             }
             await deleteBookById(id, userId);
             showToast();
-            router.push('/(tabs)/home');
+            router.back();
           },
         },
         {
