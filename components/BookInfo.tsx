@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
     borderRadius: 10,
     marginTop: 10,
-    marginBottom: 20,
+    marginBottom: 50,
   },
 });
 
