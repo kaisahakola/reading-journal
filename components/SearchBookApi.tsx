@@ -6,13 +6,11 @@ import {
   TouchableWithoutFeedback,
   View,
   TouchableOpacity,
-  FlatList,
-  Image,
-  ActivityIndicator,
 } from 'react-native';
 import { useState } from 'react';
 import { GoogleBooksResponse, GoogleBook, BookApiData } from '@/types/bookApi';
 import { TriggerAlert } from '@/utils/alert';
+import ApiResultList from '@/components/ApiResultList';
 
 interface SearchBookApiProps {
   onSelectBook: (book: BookApiData) => void;
@@ -70,7 +68,7 @@ const SearchBookApi = ({ onSelectBook }: SearchBookApiProps) => {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View>
+      <View style={{ flex: 1 }}>
         <View style={styles.container}>
           <TextInput
             placeholder="Type in the book title..."
@@ -80,41 +78,15 @@ const SearchBookApi = ({ onSelectBook }: SearchBookApiProps) => {
             style={styles.input}
           />
           <TouchableOpacity style={styles.searchBtn} onPress={searchBooks}>
-            <Text>Search</Text>
+            <Text style={{ color: 'white' }}>Search</Text>
           </TouchableOpacity>
         </View>
-        {bookListVisible && (
-          <View style={styles.list}>
-            <FlatList
-              data={books}
-              keyExtractor={(item) => item.id}
-              renderItem={({ item }) => {
-                const info = item.volumeInfo;
-                return (
-                  <TouchableOpacity
-                    style={styles.listItem}
-                    onPress={() => handleSelectBook(item.id)}
-                  >
-                    <Text>
-                      {info.title} - {info.authors?.join(', ')}
-                    </Text>
-                    {info.imageLinks && (
-                      <Image
-                        style={styles.thumbnail}
-                        source={{ uri: info.imageLinks.thumbnail }}
-                      />
-                    )}
-                  </TouchableOpacity>
-                );
-              }}
-            />
-          </View>
-        )}
-        {activateLoadingAnimation && (
-          <View style={styles.activityIndicator}>
-            <ActivityIndicator size="large" />
-          </View>
-        )}
+        <ApiResultList
+          bookListVisible={bookListVisible}
+          books={books}
+          activateLoadingAnimation={activateLoadingAnimation}
+          handleSelectBook={handleSelectBook}
+        />
       </View>
     </TouchableWithoutFeedback>
   );
@@ -123,7 +95,6 @@ const SearchBookApi = ({ onSelectBook }: SearchBookApiProps) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    margin: 'auto',
     flexDirection: 'row',
     gap: 5,
   },
@@ -137,32 +108,13 @@ const styles = StyleSheet.create({
     width: '80%',
   },
   searchBtn: {
-    backgroundColor: 'lightblue',
+    backgroundColor: 'black',
     padding: 5,
     borderRadius: 20,
     height: 50,
     width: '20%',
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  list: {
-    marginTop: 65,
-    marginBottom: 65,
-  },
-  listItem: {
-    backgroundColor: 'lightgray',
-    marginBottom: 5,
-    padding: 15,
-    borderRadius: 15,
-  },
-  thumbnail: {
-    width: '50%',
-    aspectRatio: 2 / 3,
-    resizeMode: 'cover',
-    borderRadius: 10,
-  },
-  activityIndicator: {
-    marginTop: 100,
   },
 });
 
