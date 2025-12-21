@@ -65,6 +65,7 @@ const AddNewBook = () => {
     <SafeAreaView style={styles.wrapper}>
       {!showForm && !showBookApiSearch && (
         <View style={styles.chooseOptionBtns}>
+          <Text style={styles.title}>Add a New Book</Text>
           <TouchableOpacity
             style={styles.showFormBtn}
             onPress={() => setShowForm(true)}
@@ -125,9 +126,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   chooseOptionBtns: {
-    margin: 'auto',
+    marginTop: '50%',
     width: '100%',
     gap: 30,
+    alignItems: 'center',
   },
   showFormBtn: {
     backgroundColor: 'black',
@@ -146,6 +148,11 @@ const styles = StyleSheet.create({
   },
   btnText: {
     color: 'white',
+  },
+  title: {
+    fontSize: 32,
+    fontFamily: 'Crafteds',
+    marginTop: 20,
   },
 });
 
