@@ -90,7 +90,7 @@ const AddNewBook = () => {
           <BookForm
             onSubmit={handleAddNew}
             submitLabel="Add New Book"
-            formLabel="Add New Book"
+            formLabel=""
             initialValues={
               selectedBook
                 ? {
