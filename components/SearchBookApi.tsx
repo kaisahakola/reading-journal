@@ -5,7 +5,7 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
   View,
-  TouchableOpacity,
+  TouchableOpacity, ActivityIndicator,
 } from 'react-native';
 import { useState } from 'react';
 import { GoogleBooksResponse, GoogleBook, BookApiData } from '@/types/bookApi';
@@ -81,12 +81,14 @@ const SearchBookApi = ({ onSelectBook }: SearchBookApiProps) => {
             <Text style={{ color: 'white' }}>Search</Text>
           </TouchableOpacity>
         </View>
-        <ApiResultList
-          bookListVisible={bookListVisible}
-          books={books}
-          activateLoadingAnimation={activateLoadingAnimation}
-          handleSelectBook={handleSelectBook}
-        />
+        {activateLoadingAnimation && (
+          <View style={styles.activityIndicator}>
+            <ActivityIndicator size="large" />
+          </View>
+        )}
+        {bookListVisible && (
+          <ApiResultList books={books} handleSelectBook={handleSelectBook} />
+        )}
       </View>
     </TouchableWithoutFeedback>
   );
@@ -94,12 +96,10 @@ const SearchBookApi = ({ onSelectBook }: SearchBookApiProps) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     flexDirection: 'row',
     gap: 5,
   },
   input: {
-    marginBottom: 10,
     padding: 15,
     borderRadius: 20,
     height: 50,
@@ -115,6 +115,9 @@ const styles = StyleSheet.create({
     width: '20%',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  activityIndicator: {
+    marginTop: 50,
   },
 });
 
