@@ -148,6 +148,7 @@ const styles = StyleSheet.create({
   },
   btnText: {
     color: 'white',
+    fontFamily: 'AndadaPro',
   },
   title: {
     fontSize: 32,
