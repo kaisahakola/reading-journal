@@ -16,7 +16,7 @@ const ButtonWithIcon = (props: ButtonWithIconProps) => {
       <Feather
         name={props.featherIconName}
         size={props.size ? props.size : 24}
-        color={'black'}
+        color={'#F4D58D'}
       />
     </TouchableOpacity>
   );
@@ -24,7 +24,7 @@ const ButtonWithIcon = (props: ButtonWithIconProps) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'lightgray',
+    backgroundColor: '#001427',
     borderRadius: 50,
     padding: 10,
     alignSelf: 'flex-start',

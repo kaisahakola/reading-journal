@@ -60,8 +60,8 @@ const styles = StyleSheet.create({
     marginBottom: 70,
   },
   listItem: {
-    backgroundColor: 'lightgray',
-    marginBottom: 5,
+    backgroundColor: '#708D81',
+    marginBottom: 10,
     padding: 15,
     borderRadius: 15,
     display: 'flex',

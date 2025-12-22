@@ -19,11 +19,11 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 20,
     height: 50,
-    backgroundColor: 'black',
+    backgroundColor: '#001427',
     width: '100%',
   },
   text: {
-    color: 'white',
+    color: '#F4D58D',
     textAlign: 'center',
     fontFamily: 'AndadaPro',
   },

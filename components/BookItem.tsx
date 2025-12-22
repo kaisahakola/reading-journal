@@ -17,8 +17,10 @@ const BookItem = ({ book }: BookItemProps) => {
         <Text style={styles.title}>{book.title}</Text>
         <Text style={styles.author}>{book.author}</Text>
         <StarRating rating={book.rating} size={'small'} />
-        <View style={styles.date}>
-          {book.createdAt ? <Text>{parseDate(book.createdAt)}</Text> : null}
+        <View>
+          {book.createdAt ? (
+            <Text style={styles.date}>{parseDate(book.createdAt)}</Text>
+          ) : null}
         </View>
       </TouchableOpacity>
     </View>
@@ -27,7 +29,7 @@ const BookItem = ({ book }: BookItemProps) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'lightgray',
+    backgroundColor: '#708D81',
     marginTop: 20,
     padding: 25,
     borderRadius: 20,

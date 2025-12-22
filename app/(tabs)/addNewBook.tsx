@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   showFormBtn: {
-    backgroundColor: 'black',
+    backgroundColor: '#001427',
     borderRadius: 20,
     padding: 10,
     width: '90%',
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
   btnText: {
-    color: 'white',
+    color: '#F4D58D',
     fontFamily: 'AndadaPro',
   },
   title: {

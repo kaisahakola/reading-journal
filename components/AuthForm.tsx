@@ -123,7 +123,7 @@ const AuthForm = ({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'lightgray',
+    backgroundColor: '#708D81',
     width: '100%',
     paddingTop: '30%',
   },

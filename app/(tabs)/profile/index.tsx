@@ -37,10 +37,8 @@ const Profile = () => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: '10%',
     flex: 1,
-    width: '90%',
-    margin: 'auto',
+    backgroundColor: 'white',
   },
   wrapper: {
     alignItems: 'center',

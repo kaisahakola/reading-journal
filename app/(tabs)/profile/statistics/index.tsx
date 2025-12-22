@@ -27,7 +27,12 @@ const Statistics = () => {
           {!genreStats?.length ? (
             <ActivityIndicator size="large" color="#999" />
           ) : (
-            <PieChart donut data={genreStats} showText />
+            <PieChart
+              donut
+              data={genreStats}
+              innerCircleColor={'#708D81'}
+              showText
+            />
           )}
         </View>
 
@@ -60,11 +65,11 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   genreStatWrapper: {
-    backgroundColor: '#023E8A',
+    backgroundColor: '#708D81',
     padding: 20,
     borderRadius: 20,
     borderWidth: 10,
-    borderColor: '#0077B6',
+    borderColor: '#91AFA3FF',
   },
   chartTitle: {
     color: 'white',

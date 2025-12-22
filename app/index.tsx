@@ -190,11 +190,11 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 20,
     height: 50,
-    backgroundColor: 'black',
+    backgroundColor: '#001427',
   },
   buttonText: {
     textAlign: 'center',
-    color: 'white',
+    color: '#F4D58D',
     fontFamily: 'AndadaPro',
   },
   buttonContainer: {
@@ -211,7 +211,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     padding: 30,
     alignItems: 'center',
-    backgroundColor: 'lightgray',
+    backgroundColor: '#708D81',
     borderRadius: 30,
     minHeight: '100%',
   },

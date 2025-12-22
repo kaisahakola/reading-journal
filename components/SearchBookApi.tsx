@@ -78,7 +78,7 @@ const SearchBookApi = ({ onSelectBook }: SearchBookApiProps) => {
             style={styles.input}
           />
           <TouchableOpacity style={styles.searchBtn} onPress={searchBooks}>
-            <Text style={{ color: 'white' }}>Search</Text>
+            <Text style={{ color: '#F4D58D' }}>Search</Text>
           </TouchableOpacity>
         </View>
         {activateLoadingAnimation && (
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     width: '80%',
   },
   searchBtn: {
-    backgroundColor: 'black',
+    backgroundColor: '#001427',
     padding: 5,
     borderRadius: 20,
     height: 50,

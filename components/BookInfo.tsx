@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   },
   note: {
     marginTop: 25,
-    backgroundColor: 'lightgray',
+    backgroundColor: '#708D81',
     padding: 20,
     borderRadius: 20,
     width: '80%',

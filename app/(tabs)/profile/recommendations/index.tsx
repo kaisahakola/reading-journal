@@ -96,14 +96,16 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   button: {
-    backgroundColor: 'lightblue',
+    backgroundColor: '#001427',
     width: '30%',
     padding: 10,
     borderRadius: 15,
+    marginTop: 15,
   },
   btnText: {
     textAlign: 'center',
     fontSize: 18,
+    color: '#F4D58D',
   },
   scrollContainer: {
     marginBottom: 75,
