@@ -15,8 +15,8 @@ const BookList = () => {
   }, [books]);
 
   const sortBooksByDate = (a: BookWithIdAndDate, b: BookWithIdAndDate) => {
-    const dateA = new Date(a.updatedAt ?? a.createdAt ?? 0).getTime();
-    const dateB = new Date(b.updatedAt ?? b.createdAt ?? 0).getTime();
+    const dateA = new Date(a.createdAt ?? 0).getTime();
+    const dateB = new Date(b.createdAt ?? 0).getTime();
 
     return dateB - dateA;
   };
