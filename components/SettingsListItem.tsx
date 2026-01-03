@@ -34,6 +34,7 @@ const SettingsListItem = (props: ListItemProps) => {
 const styles = StyleSheet.create({
   listItemText: {
     fontSize: 20,
+    fontFamily: 'AndadaPro',
   },
   listItem: {
     borderColor: 'darkgray',

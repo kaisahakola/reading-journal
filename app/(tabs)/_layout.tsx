@@ -7,8 +7,8 @@ const TabLayout = () => {
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: '#4A90E2',
-        tabBarInactiveTintColor: '#F4D58D',
+        tabBarActiveTintColor: '#001427',
+        tabBarInactiveTintColor: '#9999A1',
         tabBarStyle: styles.tabBar,
         tabBarIconStyle: styles.tabBarIcon,
         tabBarLabelStyle: styles.tabBarLabel,
@@ -47,15 +47,11 @@ const TabLayout = () => {
 
 const styles = StyleSheet.create({
   tabBar: {
-    backgroundColor: '#001427',
+    backgroundColor: '#E6E6E9',
     borderTopWidth: 0,
     shadowOpacity: 0.1,
-    borderRadius: 30,
-    bottom: 30,
     position: 'absolute',
-    marginLeft: 20,
-    marginRight: 20,
-    height: 75,
+    height: 95,
   },
   tabBarIcon: {
     justifyContent: 'center',

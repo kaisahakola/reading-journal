@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: '#F4F4F6',
   },
   header: {
     fontFamily: 'Crafteds',

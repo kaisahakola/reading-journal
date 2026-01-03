@@ -57,12 +57,19 @@ const SettingsList = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'lightgray',
+    backgroundColor: 'white',
     borderRadius: 20,
-    borderWidth: 1,
-    borderColor: 'darkgray',
     marginTop: 15,
     width: '90%',
+
+    // iOS shadow
+    shadowColor: '#66666E',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.25,
+    shadowRadius: 6,
+
+    // Android shadow
+    elevation: 6,
   },
 });
 

@@ -29,13 +29,22 @@ const BookItem = ({ book }: BookItemProps) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#708D81',
-    marginTop: 20,
+    backgroundColor: 'white',
+    marginTop: 10,
     padding: 25,
     borderRadius: 20,
-    width: '90%',
+    width: '92%',
     margin: 'auto',
     flex: 1,
+
+    // iOS shadow
+    shadowColor: '#9999A1',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+
+    // Android shadow
+    elevation: 4,
   },
   title: {
     fontSize: 24,

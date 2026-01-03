@@ -27,12 +27,7 @@ const Statistics = () => {
           {!genreStats?.length ? (
             <ActivityIndicator size="large" color="#999" />
           ) : (
-            <PieChart
-              donut
-              data={genreStats}
-              innerCircleColor={'#708D81'}
-              showText
-            />
+            <PieChart donut data={genreStats} showText />
           )}
         </View>
 
@@ -65,18 +60,36 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   genreStatWrapper: {
-    backgroundColor: '#708D81',
+    backgroundColor: 'white',
     padding: 20,
     borderRadius: 20,
-    borderWidth: 10,
-    borderColor: '#91AFA3FF',
+    width: '95%',
+    marginHorizontal: 'auto',
+
+    // iOS shadow
+    shadowColor: '#66666E',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.25,
+    shadowRadius: 6,
+
+    // Android shadow
+    elevation: 6,
   },
   chartTitle: {
-    color: 'white',
     fontSize: 20,
+    fontFamily: 'AndadaPro',
   },
   genreChart: {
     margin: 'auto',
+
+    // iOS shadow
+    shadowColor: '#66666E',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.25,
+    shadowRadius: 6,
+
+    // Android shadow
+    elevation: 6,
   },
   legendContainer: {
     marginTop: 20,
@@ -99,7 +112,7 @@ const styles = StyleSheet.create({
   },
   legendLabel: {
     fontSize: 16,
-    color: 'white',
+    fontFamily: 'AndadaPro',
   },
 });
 

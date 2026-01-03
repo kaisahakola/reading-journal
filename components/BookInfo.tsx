@@ -20,9 +20,14 @@ const BookInfo = ({ book }: BookInfoProps) => {
           <Text style={styles.genre}>{book.genre}</Text>
           <StarRating rating={book.rating} size={'big'} />
           <Text style={styles.note}>{book.note}</Text>
-          {book.thumbnail ? (
-            <Image style={styles.thumbnail} source={{ uri: book.thumbnail }} />
-          ) : null}
+          <View style={styles.thumbnailContainer}>
+            {book.thumbnail ? (
+              <Image
+                style={styles.thumbnail}
+                source={{ uri: book.thumbnail }}
+              />
+            ) : null}
+          </View>
         </View>
       </ScrollView>
     </View>
@@ -32,6 +37,7 @@ const BookInfo = ({ book }: BookInfoProps) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'white',
   },
   textContainer: {
     alignItems: 'center',
@@ -53,11 +59,21 @@ const styles = StyleSheet.create({
   },
   note: {
     marginTop: 25,
-    backgroundColor: '#708D81',
+    marginBottom: 15,
+    backgroundColor: '#F4F4F6',
     padding: 20,
     borderRadius: 20,
     width: '80%',
     fontSize: 16,
+
+    // iOS shadow
+    shadowColor: '#9999A1',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+
+    // Android shadow
+    elevation: 4,
   },
   genre: {
     fontFamily: 'Helvetica',
@@ -70,6 +86,16 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginTop: 10,
     marginBottom: 50,
+  },
+  thumbnailContainer: {
+    // iOS shadow
+    shadowColor: '#66666E',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.25,
+    shadowRadius: 6,
+
+    // Android shadow
+    elevation: 6,
   },
 });
 

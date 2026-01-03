@@ -106,6 +106,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 18,
     color: '#F4D58D',
+    fontFamily: 'AndadaPro',
   },
   scrollContainer: {
     marginBottom: 75,
