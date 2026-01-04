@@ -35,6 +35,13 @@ export type Genres =
   | 'young adult'
   | `children's book`
   | 'classics'
+  | 'true crime'
+  | 'science & technology'
+  | 'humor'
+  | 'history'
+  | 'travel'
+  | 'mystery'
+  | 'LGBTQ+'
   | 'other';
 
 export const GenresList: { label: string; value: Genres }[] = [
@@ -52,5 +59,12 @@ export const GenresList: { label: string; value: Genres }[] = [
   { label: 'Young Adult', value: 'young adult' },
   { label: "Children's Book", value: `children's book` },
   { label: 'Classics', value: 'classics' },
+  { label: 'True Crime', value: 'true crime' },
+  { label: 'Science & Technology', value: 'science & technology' },
+  { label: 'Humor', value: 'humor' },
+  { label: 'History', value: 'history' },
+  { label: 'Travel', value: 'travel' },
+  { label: 'Mystery', value: 'mystery' },
+  { label: 'LGBTQ+', value: 'LGBTQ+' },
   { label: 'Other', value: 'other' },
 ];
