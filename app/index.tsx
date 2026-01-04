@@ -211,13 +211,13 @@ const styles = StyleSheet.create({
   contentContainer: {
     padding: 30,
     alignItems: 'center',
-    backgroundColor: '#708D81',
+    backgroundColor: 'white',
     borderRadius: 30,
     minHeight: '100%',
   },
   sheetContainer: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#E6E6E9',
   },
   backgroundContainer: {
     paddingTop: '30%',

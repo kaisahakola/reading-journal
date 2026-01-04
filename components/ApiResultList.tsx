@@ -35,9 +35,7 @@ const ApiResultList = ({ books, handleSelectBook }: ApiResultListProps) => {
                 )}
                 <View style={styles.textContainer}>
                   <Text style={styles.title}>{info.title}</Text>
-                  <Text style={styles.author}>
-                    {info.authors?.join(', ')}
-                  </Text>
+                  <Text style={styles.author}>{info.authors?.join(', ')}</Text>
                   <Text style={styles.publishedYear}>
                     {info.publishedDate?.slice(0, 4)}
                   </Text>
@@ -60,12 +58,21 @@ const styles = StyleSheet.create({
     marginBottom: 70,
   },
   listItem: {
-    backgroundColor: '#708D81',
+    backgroundColor: 'white',
     marginBottom: 10,
     padding: 15,
     borderRadius: 15,
     display: 'flex',
     flexDirection: 'row',
+
+    // iOS shadow
+    shadowColor: '#9999A1',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+
+    // Android shadow
+    elevation: 4,
   },
   thumbnail: {
     width: '30%',
