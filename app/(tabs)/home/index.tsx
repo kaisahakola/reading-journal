@@ -1,11 +1,12 @@
-import { Text, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import BookList from '@/components/BookList';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import SearchBar from '@/components/SearchBar';
 
 const Home = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.header}>Books in your Journal</Text>
+      <SearchBar />
       <BookList />
     </SafeAreaView>
   );
