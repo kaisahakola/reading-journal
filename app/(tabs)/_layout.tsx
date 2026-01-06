@@ -7,6 +7,7 @@ const TabLayout = () => {
     <Tabs
       screenOptions={{
         headerShown: false,
+        tabBarShowLabel: false,
         tabBarActiveTintColor: '#001427',
         tabBarInactiveTintColor: '#9999A1',
         tabBarStyle: styles.tabBar,
@@ -17,7 +18,6 @@ const TabLayout = () => {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
           tabBarIcon: ({ color, size }) => (
             <FontAwesome name="home" size={size} color={color} />
           ),
@@ -26,7 +26,6 @@ const TabLayout = () => {
       <Tabs.Screen
         name="library"
         options={{
-          title: 'Library',
           tabBarIcon: ({ color, size }) => (
             <FontAwesome name="book" size={size} color={color} />
           ),
@@ -35,7 +34,6 @@ const TabLayout = () => {
       <Tabs.Screen
         name="addNewBook"
         options={{
-          title: 'Add New',
           tabBarIcon: ({ color, size }) => (
             <FontAwesome name="plus" size={size} color={color} />
           ),
@@ -44,7 +42,6 @@ const TabLayout = () => {
       <Tabs.Screen
         name="profile"
         options={{
-          title: 'Profile',
           tabBarIcon: ({ color, size }) => (
             <FontAwesome name="user" size={size} color={color} />
           ),
@@ -60,7 +57,10 @@ const styles = StyleSheet.create({
     borderTopWidth: 0,
     shadowOpacity: 0.1,
     position: 'absolute',
-    height: 95,
+    height: 65,
+    marginBottom: 25,
+    marginHorizontal: 35,
+    borderRadius: 50,
   },
   tabBarIcon: {
     justifyContent: 'center',
