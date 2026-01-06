@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     fontSize: 32,
     marginBottom: 50,
     textAlign: 'center',
-    fontFamily: 'Crafteds',
+    fontFamily: 'Marcellus',
   },
   input: {
     marginBottom: 15,

@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 36,
-    fontFamily: 'Crafteds',
+    fontFamily: 'Marcellus',
     marginBottom: 5,
     textAlign: 'center',
     paddingHorizontal: 15,

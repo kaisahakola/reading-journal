@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: 'bold',
     textAlign: 'center',
-    fontFamily: 'Crafteds',
+    fontFamily: 'Marcellus',
   },
   ratingInput: {
     marginTop: 5,

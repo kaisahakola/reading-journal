@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32,
-    fontFamily: 'Crafteds',
+    fontFamily: 'Marcellus',
     marginTop: 20,
   },
 });

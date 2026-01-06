@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     padding: 15,
   },
   title: {
-    fontFamily: 'Crafteds',
+    fontFamily: 'Marcellus',
     fontSize: 32,
   },
   name: {

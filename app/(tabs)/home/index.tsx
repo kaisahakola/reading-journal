@@ -14,11 +14,10 @@ const Home = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
     backgroundColor: '#F4F4F6',
   },
   header: {
-    fontFamily: 'Crafteds',
+    fontFamily: 'Marcellus',
     fontSize: 32,
   },
 });

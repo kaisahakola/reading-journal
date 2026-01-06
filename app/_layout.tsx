@@ -12,7 +12,7 @@ export default function RootLayout() {
 
   useEffect(() => {
     Font.loadAsync({
-      Crafteds: require('../assets/fonts/Crafteds-Regular.ttf'),
+      Marcellus: require('../assets/fonts/Marcellus-Regular.ttf'),
       AndadaPro: require('../assets/fonts/AndadaPro-VariableFont_wght.ttf'),
     }).then(() => setFontsLoaded(true));
     if (loading) return;
