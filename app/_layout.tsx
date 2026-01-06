@@ -20,7 +20,7 @@ export default function RootLayout() {
       router.replace('/');
     }
     if (user) {
-      router.replace('/(tabs)/home');
+      router.replace('/(tabs)');
     }
   }, [user, loading, router]);
 

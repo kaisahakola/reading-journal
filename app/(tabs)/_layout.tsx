@@ -15,9 +15,18 @@ const TabLayout = () => {
       }}
     >
       <Tabs.Screen
-        name="home"
+        name="index"
         options={{
           title: 'Home',
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="home" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="library"
+        options={{
+          title: 'Library',
           tabBarIcon: ({ color, size }) => (
             <FontAwesome name="book" size={size} color={color} />
           ),

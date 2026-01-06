@@ -72,7 +72,7 @@ const BookDetailsScreen = () => {
           <ButtonWithIcon
             buttonType={'edit'}
             featherIconName={'edit-2'}
-            onPress={() => router.push(`/home/book/${id}/edit`)}
+            onPress={() => router.push(`/library/book/${id}/edit`)}
           />
         </View>
       </View>

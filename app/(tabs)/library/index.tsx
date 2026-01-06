@@ -3,7 +3,7 @@ import BookList from '@/components/BookList';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import SearchBar from '@/components/SearchBar';
 
-const Home = () => {
+const Library = () => {
   return (
     <SafeAreaView style={styles.container}>
       <SearchBar />
@@ -23,4 +23,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export default Library;
