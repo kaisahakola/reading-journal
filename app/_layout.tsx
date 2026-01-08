@@ -17,7 +17,7 @@ export default function RootLayout() {
     }).then(() => setFontsLoaded(true));
     if (loading) return;
     if (!user) {
-      router.replace('/');
+      router.replace('/login');
     }
     if (user) {
       router.replace('/(tabs)');

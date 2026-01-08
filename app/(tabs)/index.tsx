@@ -17,6 +17,7 @@ const Home = () => {
   const router = useRouter();
 
   useEffect(() => {
+    if (!userId) return;
     if (hasAnimated.current) false;
 
     Animated.timing(translateY, {

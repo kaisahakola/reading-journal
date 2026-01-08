@@ -22,7 +22,7 @@ const SettingsList = () => {
 
   const logOut = async () => {
     await signOut(auth);
-    router.replace('/');
+    router.replace('/login');
   };
 
   return (
