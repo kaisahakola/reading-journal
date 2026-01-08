@@ -40,7 +40,7 @@ const Index = () => {
     if (authMode === 'login') {
       try {
         await signInWithEmailAndPassword(auth, email, password);
-        router.replace('/(tabs)/home');
+        router.replace('/(tabs)');
       } catch (err: any) {
         console.log(err.code);
         showToast('error', getAuthErrorMessages(err.code));
@@ -74,7 +74,7 @@ const Index = () => {
           email: user.email,
           createdAt: new Date(),
         });
-        router.replace('/(tabs)/home');
+        router.replace('/(tabs)');
       } catch (err: any) {
         console.log(err.code);
         showToast('error', getAuthErrorMessages(err.code));
