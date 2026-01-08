@@ -9,7 +9,7 @@ const TabLayout = () => {
         headerShown: false,
         tabBarShowLabel: false,
         tabBarActiveTintColor: '#001427',
-        tabBarInactiveTintColor: '#9999A1',
+        tabBarInactiveTintColor: '#DBEEEC',
         tabBarStyle: styles.tabBar,
         tabBarIconStyle: styles.tabBarIcon,
         tabBarLabelStyle: styles.tabBarLabel,
@@ -53,7 +53,7 @@ const TabLayout = () => {
 
 const styles = StyleSheet.create({
   tabBar: {
-    backgroundColor: '#E6E6E9',
+    backgroundColor: '#2A9D8F',
     borderTopWidth: 0,
     shadowOpacity: 0.1,
     position: 'absolute',
