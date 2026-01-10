@@ -47,7 +47,7 @@ const AddNewBook = () => {
 
     showToast();
     await addBook(userId, fullBookData);
-    router.replace('/(tabs)/home');
+    router.replace('/(tabs)/library');
   };
 
   const handleBookSelect = (book: BookApiData) => {
